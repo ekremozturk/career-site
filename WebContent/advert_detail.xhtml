@@ -6,6 +6,7 @@
 
 <f:metadata>
   <f:event type="preRenderView" listener="#{advertController.loadTheAdvert(param['pid'])}"/>
+  <f:event type="preRenderView" listener="#{advertController.getId(hraccess.id)}"/>
 </f:metadata>
 
 <h:head>
@@ -34,10 +35,7 @@
 	<br></br>
 	Company: <h:outputText value="#{advertController.theAdvert.hr_id}"></h:outputText>
 	<br></br>
-	
-	
-	
-	
+
 </h:body>
 
 </html>

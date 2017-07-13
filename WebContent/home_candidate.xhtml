@@ -5,7 +5,7 @@
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
 	  
 <f:metadata>
-  <f:event type="preRenderView" listener="#{advertController.getId(hraccess.id)}"/>
+  <f:event type="preRenderView" listener="#{access.main()}"/>
   <f:event type="preRenderView" listener="#{advertController.loadAdverts()}"/>
 </f:metadata>
 
@@ -16,9 +16,7 @@
 </h:head>
 
 <h:body>
-	<h:button value="Add Advert" outcome="add_advert"/>
-	<h:form>			
-	<h:dataTable value="#{advertController.companyAdverts}" var="theAd">
+	<h:dataTable value="#{advertController.activeAdverts}" var="theAd">
 
 				<h:column>
 					<!-- the column header -->
@@ -51,34 +49,15 @@
 					<!--  the value for each row -->
 					<h:outputLink value ="advert_detail.xhtml">
 					<f:param name="pid" value="#{theAd.id}" />More Info</h:outputLink>
-					
-					
 				</h:column>
-				
-				<h:column>
-					<!-- the column header -->
-					<f:facet name="header"></f:facet>
 
-					<!--  the value for each row -->
-					<h:outputLink value ="edit_advert.xhtml">
-					<f:param name="pid" value="#{theAd.id}" />Edit</h:outputLink>
-					
-				</h:column>
-				
-				<h:column>
-					<!-- the column header -->
-					<f:facet name="header"></f:facet>
-
-					<!--  the value for each row -->
-					<h:commandLink value="Delete" action="#{advertController.deleteAdvert(theAd.id)}"/>
-					
-				</h:column>
-				
-				
-
-	</h:dataTable>
+			</h:dataTable>
+			
+			#{access.id}
+			
 	
-	</h:form>
 </h:body>
 
 </html>
+
+

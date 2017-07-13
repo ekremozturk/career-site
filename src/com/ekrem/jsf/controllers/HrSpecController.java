@@ -6,6 +6,9 @@ package com.ekrem.jsf.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import com.ekrem.jsf.db.HrSpecDAO;
 import com.ekrem.jsf.models.HrSpec;
 
@@ -13,6 +16,8 @@ import com.ekrem.jsf.models.HrSpec;
  * @author ekrem
  *
  */
+@ManagedBean
+@SessionScoped
 public class HrSpecController {
 	
 	private HrSpecDAO hrSpecDAO;
@@ -81,6 +86,18 @@ public class HrSpecController {
 		}
 		
 		return "home?faces-redirect=true";
+	}
+	
+	public long getId(String company, String password) {
+		long id = -1;
+		try {
+			id = hrSpecDAO.checkPassword(company, password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return id;
 	}
 
 }

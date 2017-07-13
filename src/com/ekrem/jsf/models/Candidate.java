@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
  *
  */
 @ManagedBean
-public class Candidate {
+public class Candidate{
 	private long id;
 	private String name;
 	private String surname;
@@ -19,7 +19,7 @@ public class Candidate {
 	private String skills;
 	
 	public Candidate() {
-		
+
 	}
 	
 

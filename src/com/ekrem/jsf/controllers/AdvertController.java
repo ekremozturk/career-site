@@ -23,9 +23,14 @@ public class AdvertController {
 	
 	private Date date = new Date();
 	
+	private long hr_id;
+	
+	private List<Advert> companyAdverts;
+	
 	public AdvertController() throws Exception {
 		theAdvert = new Advert();
 		adverts = new ArrayList<>();
+		companyAdverts = new ArrayList<>();
 		activeAdverts = new ArrayList<>();
 		advertDAO = AdvertDAO.getAdvertInstance();
 	}
@@ -37,7 +42,7 @@ public class AdvertController {
 		
 		adverts.clear();
 		activeAdverts.clear();
-		theAdvert=new Advert();
+		companyAdverts.clear();
 
 		try {
 			
@@ -46,6 +51,10 @@ public class AdvertController {
 			for(Advert a:adverts) 
 				if(a.getActive()) 
 					activeAdverts.add(a);
+			
+			for(Advert a:adverts)
+				if(a.getHr_id() == hr_id)
+					companyAdverts.add(a);
 			
 		} catch (Exception exc) {
 			
@@ -57,6 +66,7 @@ public class AdvertController {
 		theAdvert=new Advert();
 		
 		try {
+			System.out.println(id);
 			theAdvert = advertDAO.getAdvert(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -67,6 +77,7 @@ public class AdvertController {
 	public List<Advert> getAdverts() {
 		return adverts;
 	}
+	
 
 	public void setAdverts(List<Advert> ads) {
 		this.adverts = ads;
@@ -90,10 +101,9 @@ public class AdvertController {
 
 	public String addAdvert(Advert advert) {
 		
-		advert.setHr_id(1);
-		advert.setCode("JA" + advert.getHr_id());
+		advert.setHr_id(hr_id);
+		advert.setCode("JA" + hr_id*100 + companyAdverts.size());
 		advert.setOpen_time(date);
-		
 		
 		try {
 			advertDAO.addAdvert(advert);
@@ -107,7 +117,10 @@ public class AdvertController {
 	}
 	
 	public String updateAdvert(Advert advert) {
-		
+		advert.setId(theAdvert.getId());
+		advert.setHr_id(theAdvert.getHr_id());
+		advert.setCode(theAdvert.getCode());
+		advert.setOpen_time(theAdvert.getOpen_time());
 		try {
 			advertDAO.updateAdvert(advert);
 		} catch (Exception e) {
@@ -140,5 +153,26 @@ public class AdvertController {
 		}
 		
 		
+	}
+	
+	public void getId(long hr_id) {
+		this.hr_id = hr_id;
+		System.out.println(this.hr_id);
+	}
+
+	public long getHr_id() {
+		return hr_id;
+	}
+
+	public void setHr_id(long hr_id) {
+		this.hr_id = hr_id;
+	}
+
+	public List<Advert> getCompanyAdverts() {
+		return companyAdverts;
+	}
+
+	public void setCompanyAdverts(List<Advert> companyAdverts) {
+		this.companyAdverts = companyAdverts;
 	}
 }

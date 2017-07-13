@@ -4,21 +4,19 @@
 package com.ekrem.jsf.models;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 /**
  * @author ekrem
  *
  */
-@ManagedBean
-@SessionScoped
-public class HrSpec {
+@ManagedBean (name="hrspec")
+public class HrSpec{
 	private long id;
 	private String company;
 	private String password;
-
+	
 	public HrSpec() {
-		
+
 	}
 	
 	public HrSpec(String company) {

@@ -37,7 +37,7 @@ public class LinkedInAccess {
         final OAuth20Service service = new ServiceBuilder(clientId)
                 .apiSecret(clientSecret)
                 .scope("r_basicprofile r_emailaddress") // replace with desired scope
-                .callback("http://localhost:8080/SummerOBSS/faces/home.xhtml")
+                .callback("http://localhost:8080/SummerOBSS/faces/home_candidate.xhtml")
                 .state("DCEeFWf45A53sdfKeK424")
                 .build(LinkedInAPI.instance());
 		
@@ -82,6 +82,7 @@ public class LinkedInAccess {
 		int codeIndex = code.indexOf("&");
 		code = code.substring(5, codeIndex);
 		}
+		System.out.println(code);
 		return code;
 		
 	}

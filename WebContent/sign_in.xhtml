@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+
+	<title>Welcome</title>
+	
+</h:head>
+
+<h:body>
+
+	<div>
+		<h:form>
+		
+			<h:outputLabel>Company: </h:outputLabel> 
+			<h:inputText value="#{hrspec.company}" id="company" required="true"/>
+			<h:message for="company" />
+		
+			<h:outputLabel>Password: </h:outputLabel> 
+			<h:inputSecret value="#{hrspec.password}" id="password" required="true"/>
+			<h:message for="password" />
+		
+			<h:commandButton value="Log in" action="#{hraccess.SignIn(hrspec.company, hrspec.password)}"/>
+		
+		</h:form>
+	</div>
+	
+	<h:outputLink value="#{auth.main()}"> Sign-in via Linkedin </h:outputLink>
+	
+	</h:body>
+
+</html>
+	
