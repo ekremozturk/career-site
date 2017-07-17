@@ -84,9 +84,10 @@ public class CandidateDAO {
 				String headline = myRs.getString("headline");
 				String link_id = myRs.getString("link_id");
 				String skills = myRs.getString("skills");
+				int blacklist = myRs.getInt("blacklist");
 			
 				Candidate candidate = new Candidate(id, name, surname,
-						headline, link_id, skills);
+						headline, link_id, skills, blacklist);
 
 		
 				candidates.add(candidate);
@@ -153,9 +154,10 @@ public class CandidateDAO {
 				String headline = rs.getString("headline");
 				String link_id = rs.getString("link_id");
 				String skills = rs.getString("skills");
+				int blacklist = rs.getInt("blacklist");
 
 				candidate = new Candidate(id, name, surname,
-						headline, link_id, skills);
+						headline, link_id, skills, blacklist);
 
 			}
 			else {
@@ -181,7 +183,7 @@ public class CandidateDAO {
 			con = dataSource.getConnection();
 
 			String sql = "update candidate "
-						+ " set name=?, surname=?, headline=?, skills=?"
+						+ " set name=?, surname=?, headline=?, skills=?, blacklist=?"
 						+ " where id=?";
 
 			stmt = con.prepareStatement(sql);
@@ -191,6 +193,8 @@ public class CandidateDAO {
 			stmt.setString(2, candidate.getSurname());
 			stmt.setString(3, candidate.getHeadline());
 			stmt.setString(4, candidate.getSkills());
+			stmt.setInt(5, candidate.getBlacklist());
+			stmt.setLong(6, candidate.getId());
 			
 			stmt.execute();
 		}
@@ -250,9 +254,10 @@ public class CandidateDAO {
 				String surname = rs.getString("surname");
 				String headline = rs.getString("headline");
 				String skills = rs.getString("skills");
+				int blacklist= rs.getInt("blacklist");
 
 				candidate = new Candidate(id, name, surname,
-						headline, link_id, skills);
+						headline, link_id, skills, blacklist);
 
 			}
 			else {

@@ -17,6 +17,7 @@ public class Candidate{
 	private String headline;
 	private String link_id;
 	private String skills;
+	private int blacklist=0;
 	
 	public Candidate() {
 
@@ -35,9 +36,17 @@ public class Candidate{
 		this.skills = skills;
 	}
 
-
-
-
+	public Candidate(long id, String name, String surname, String headline, String link_id, String skills, int blacklist) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.headline = headline;
+		this.link_id = link_id;
+		this.skills = skills;
+		this.blacklist = blacklist;
+	}
+	
 	public Candidate(String name, String surname, String headline, String link_id, String skills) {
 		super();
 		this.name = name;
@@ -107,7 +116,25 @@ public class Candidate{
 	public void setSkills(String skills) {
 		this.skills = skills;
 	}
+
+
+
+
+	public int getBlacklist() {
+		return blacklist;
+	}
+
+
+
+
+	public void setBlacklist(int blacklist) {
+		this.blacklist = blacklist;
+	}
 	
-	
+	public String isBlacklisted() {
+		if(blacklist==1)
+			return "Blacklisted";
+		return "Normal";
+	}
 	
 }

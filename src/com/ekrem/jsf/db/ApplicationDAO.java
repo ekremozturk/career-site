@@ -15,6 +15,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.ekrem.jsf.models.Application;
+import com.ekrem.jsf.models.Candidate;
 
 public class ApplicationDAO {
 	
@@ -22,6 +23,8 @@ public class ApplicationDAO {
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/job_app_db";
 	private SimpleDateFormat format = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
+	
+	private CandidateDAO candidateDAO = CandidateDAO.getCandidateInstance();
 	
 	public static ApplicationDAO getApplicationInstance() throws Exception {
 		if(applicationInstance == null) applicationInstance = new ApplicationDAO();
@@ -172,6 +175,27 @@ public class ApplicationDAO {
 
 	}
 	
+	public Candidate getCandidate(long id) {
+		Application application = new Application();
+		try {
+			application = getApplication(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Candidate candidate = new Candidate();
+		try {
+			candidate = candidateDAO.getCandidate(application.getCandidate_id());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return candidate;
+		
+	}
+	
 	public void updateApplication(Application application) throws Exception {
 
 		Connection con = null;
@@ -224,6 +248,44 @@ public class ApplicationDAO {
 			con.close();
 			stmt.close();
 		}		
+	}
+	
+	public void dropApplications(long candidate_id) throws Exception {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			con = dataSource.getConnection();
+			
+			String sql = "select * from application where candidate_id=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setLong(1, candidate_id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				sql = "update application "
+						+ " set status=?"
+						+ " where id=?";
+				
+				stmt = con.prepareStatement(sql);
+				
+				stmt.setString(1, "Rejected");
+				stmt.setLong(2, rs.getLong("id"));
+				
+				stmt.execute();
+			}
+		} finally {
+			con.close();
+			stmt.close();
+			rs.close();
+			
+		}
+		
+		
+		
 	}
 
 

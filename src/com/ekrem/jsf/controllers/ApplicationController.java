@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.ekrem.jsf.db.ApplicationDAO;
 import com.ekrem.jsf.models.Application;
+import com.ekrem.jsf.models.Candidate;
 
 @ManagedBean (name = "applicationController")
 @SessionScoped
@@ -153,9 +154,18 @@ public class ApplicationController {
 		}
 		
 		application.setStatus(status);
+		
+		if(getCandidate(application).getBlacklist()==0)
 		updateApplication(application);
 		
 		return "applications?faces-redirect=true";
+	}
+	
+	public Candidate getCandidate(Application a) {
+		
+		Candidate candidate = applicationDAO.getCandidate(a.getId());
+		return candidate;
+		
 	}
 	
 	public void filterResults() {

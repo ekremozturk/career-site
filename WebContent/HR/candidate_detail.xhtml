@@ -33,6 +33,8 @@
 	<br></br>
 	Skills: <h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
 	<br></br>
+	Status: <h:outputText value="#{candidateController.theCandidate.isBlacklisted()}"></h:outputText>
+	<br></br>
 	
 	<h:form>			
 		<h:dataTable value="#{applicationController.candidateApplications}" var="theApp">
@@ -75,12 +77,22 @@
 
 					<!--  the value for each row -->
 					<h:outputLink value ="application_detail.xhtml">
-					<f:param name="pid" value="#{theApp.id}" />More Info</h:outputLink>
-					
-					
+					<f:param name="pid" value="#{theApp.id}" />More Info</h:outputLink>		
 				</h:column>
 				
 		</h:dataTable>
+		
+			<h:form>
+
+			Blacklist: 
+			<h:selectOneMenu value="#{candidateController.blacklist}">
+				<f:selectItem itemLabel="Yes" itemValue="Yes" />
+				<f:selectItem itemLabel="No" itemValue="No" />
+			</h:selectOneMenu>
+
+		    <h:commandButton value="Submit" action="#{candidateController.blacklist(candidateController.theCandidate)}" />
+
+		</h:form>
 	
 	</h:form>
 	
