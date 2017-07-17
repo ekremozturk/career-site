@@ -223,6 +223,51 @@ public class CandidateDAO {
 			stmt.close();
 		}		
 	}
+	
+	public Candidate getCandidate(String link_id) throws Exception {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+
+			String sql = "select * from candidate where link_id=?";
+
+			stmt = con.prepareStatement(sql);
+			
+			// set params
+			stmt.setString(1, link_id);
+			
+			rs = stmt.executeQuery();
+
+			Candidate candidate;
+			
+			// retrieve data from result set row
+			if (rs.next()) {
+				Long id = rs.getLong("id");
+				String name = rs.getString("name");
+				String surname = rs.getString("surname");
+				String headline = rs.getString("headline");
+				String skills = rs.getString("skills");
+
+				candidate = new Candidate(id, name, surname,
+						headline, link_id, skills);
+
+			}
+			else {
+				throw new Exception("Could not find the candidate");
+			}
+
+			return candidate;
+		}
+		finally {
+			con.close();
+			stmt.close();
+			rs.close();
+		}
+
+	}
 
 
 }

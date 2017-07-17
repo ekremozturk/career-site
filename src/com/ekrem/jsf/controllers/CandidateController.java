@@ -10,19 +10,22 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.ekrem.jsf.db.CandidateDAO;
+import com.ekrem.jsf.models.Application;
 import com.ekrem.jsf.models.Candidate;
 
 /**
  * @author ekrem
  *
  */
-@ManagedBean
+@ManagedBean (name="candidateController")
 @SessionScoped
 public class CandidateController {
 	
 	private CandidateDAO candidateDAO;
 	//MAKE CANDİDATES SESSİON LONG
 	private List<Candidate> candidates;
+	
+	private Candidate theCandidate;
 	
 	
 	public CandidateController() throws Exception {
@@ -90,6 +93,53 @@ public class CandidateController {
 		
 		return "home?faces-redirect=true";
 	}
+	
+	public Candidate getCandidate(String link_id) {
+		Candidate candidate = null;
+		try {
+			candidate = candidateDAO.getCandidate(link_id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return candidate;
+	}
+	
+	public Candidate getCandidate(long id) {
+		Candidate candidate = null;
+		try {
+			candidate = candidateDAO.getCandidate(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return candidate;
+	}
+	
+	public void loadTheCandidate(long id) {
+		
+		theCandidate=new Candidate();
+		
+		try {
+			System.out.println(id);
+			theCandidate = candidateDAO.getCandidate(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public Candidate getTheCandidate() {
+		return theCandidate;
+	}
+
+	public void setTheCandidate(Candidate theCandidate) {
+		this.theCandidate = theCandidate;
+	}
+	
+	
 
 
 }

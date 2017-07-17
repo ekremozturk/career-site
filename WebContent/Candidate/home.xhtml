@@ -5,7 +5,6 @@
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
 	  
 <f:metadata>
-  <f:event type="preRenderView" listener="#{access.main()}"/>
   <f:event type="preRenderView" listener="#{advertController.loadAdverts()}"/>
 </f:metadata>
 
@@ -16,6 +15,9 @@
 </h:head>
 
 <h:body>
+
+	<h:button value="Applications" outcome="applications"/>
+	
 	<h:dataTable value="#{advertController.activeAdverts}" var="theAd">
 
 				<h:column>

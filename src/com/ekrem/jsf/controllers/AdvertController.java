@@ -7,13 +7,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.ekrem.jsf.db.AdvertDAO;
+import com.ekrem.jsf.db.ApplicationDAO;
 import com.ekrem.jsf.models.Advert;
+import com.ekrem.jsf.models.Application;
 
 @ManagedBean (name = "advertController")
 @SessionScoped
 public class AdvertController {
 
 	private AdvertDAO advertDAO;
+	private ApplicationDAO applicationDAO;
 	
 	private List<Advert> adverts;
 	
@@ -33,6 +36,7 @@ public class AdvertController {
 		companyAdverts = new ArrayList<>();
 		activeAdverts = new ArrayList<>();
 		advertDAO = AdvertDAO.getAdvertInstance();
+		applicationDAO = ApplicationDAO.getApplicationInstance();
 	}
 	
 	/**
@@ -134,6 +138,10 @@ public class AdvertController {
 	public String deleteAdvert(long id) {
 		
 		try {
+			ApplicationController applicationController = new ApplicationController();
+			for(Application a :applicationController.getApplications())
+				if (a.getAdvert_id() == id)
+					applicationDAO.deleteApplication(a.getId());
 			advertDAO.deleteAdvert(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -157,7 +165,6 @@ public class AdvertController {
 	
 	public void getId(long hr_id) {
 		this.hr_id = hr_id;
-		System.out.println(this.hr_id);
 	}
 
 	public long getHr_id() {

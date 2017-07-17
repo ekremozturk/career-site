@@ -3,15 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  
+<f:metadata>
+  <f:event type="preRenderView" listener="#{access.main()}"/>
+  <f:event type="preRenderView" listener="#{advertController.loadAdverts()}"/>
+</f:metadata>
 
-<h:head>
+<head>
 
-	<title>Sign-in via LinkedIn</title>
-	
-</h:head>
+</head>
 
-<h:body>
-	#{access.main()}
-</h:body>
+<body>
+<h3>Login Successful!</h3>
+	#{access.redirect()}
+</body>
 
 </html>

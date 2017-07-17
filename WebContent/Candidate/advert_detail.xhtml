@@ -6,7 +6,6 @@
 
 <f:metadata>
   <f:event type="preRenderView" listener="#{advertController.loadTheAdvert(param['pid'])}"/>
-  <f:event type="preRenderView" listener="#{advertController.getId(hraccess.id)}"/>
 </f:metadata>
 
 <h:head>
@@ -15,11 +14,9 @@
 	
 </h:head>
 
-<h:body>
+<h:body> 
 	
-	<!--#{access.id} -->
-	
-	<p><h:outputLink value="sign_in.xhtml">Home</h:outputLink></p>
+	<p><h:outputLink value="home.xhtml">Home</h:outputLink></p>
 	
 	Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
 	<br></br>
@@ -35,6 +32,18 @@
 	<br></br>
 	Company: <h:outputText value="#{advertController.theAdvert.hr_id}"></h:outputText>
 	<br></br>
+	
+	<h:outputLabel>Cover Letter:</h:outputLabel>
+	
+	<h:form>
+	 <h:inputTextarea value="#{app.cover_letter}" id="cover_letter" /> 
+	<h:message for="cover letter" />
+	
+	<h:commandButton value="Apply" 
+	action="#{applicationController.addApplication(advertController.theAdvert.hr_id, advertController.theAdvert.id, candidateController.getCandidate(access.id).id, app.cover_letter)}"/>
+	</h:form>
+	
+	
 
 </h:body>
 

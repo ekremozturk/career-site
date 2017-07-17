@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  
+<f:metadata>
+	<f:event type="preRenderView" listener="#{applicationController.getId(hraccess.id)}"/>
+  	<f:event type="preRenderView" listener="#{candidateController.loadTheCandidate(param['pid'])}"/>
+  	<f:event type="preRenderView" listener="#{applicationController.setCandidate_id(param['pid'])}"/>
+  	<f:event type="preRenderView" listener="#{applicationController.loadApplications()}"/>
+</f:metadata>
+
+<h:head>
+
+	<title>Candidate Info</title>
+	
+</h:head>
+
+<h:body>
+	
+	<!--#{access.id} -->
+	
+	<p>	<h:button value="Home" outcome="home"/></p>
+	
+	<p><h:button value="Applications" outcome="applications"/></p>
+	
+	Name: <h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
+	<br></br>
+	Surname: <h:outputText value="#{candidateController.theCandidate.surname}"></h:outputText>
+	<br></br>
+	Headline: <h:outputText value="#{candidateController.theCandidate.headline}"></h:outputText>
+	<br></br>
+	Skills: <h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
+	<br></br>
+	
+	<h:form>			
+		<h:dataTable value="#{applicationController.candidateApplications}" var="theApp">
+
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Company</f:facet>
+
+					<!--  the value for each row -->
+					#{hrSpecController.getHrSpec(theApp.hr_id).company}
+				</h:column>
+
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Advert</f:facet>
+
+					<!--  the value for each row -->
+					#{advertController.getAdvert(theApp.advert_id).head}
+				</h:column>
+
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Candidate Name</f:facet>
+
+					<!--  the value for each row -->
+					#{candidateController.getCandidate(theApp.candidate_id).name}
+				</h:column>
+
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Candidate Surname</f:facet>
+
+					<!--  the value for each row -->
+					#{candidateController.getCandidate(theApp.candidate_id).surname}
+				</h:column>
+				
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header"></f:facet>
+
+					<!--  the value for each row -->
+					<h:outputLink value ="application_detail.xhtml">
+					<f:param name="pid" value="#{theApp.id}" />More Info</h:outputLink>
+					
+					
+				</h:column>
+				
+		</h:dataTable>
+	
+	</h:form>
+	
+</h:body>
+
+</html>

@@ -27,7 +27,7 @@ public class SigninAccess {
 		
 		id = hrSpecController.getId(company, password);
 		
-		return "home?faces-redirect=true";
+		return "HR/home?faces-redirect=true";
 	}
 
 }

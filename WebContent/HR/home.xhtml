@@ -17,6 +17,7 @@
 
 <h:body>
 	<h:button value="Add Advert" outcome="add_advert"/>
+	<h:button value="Applications" outcome="applications"/>
 	<h:form>			
 	<h:dataTable value="#{advertController.companyAdverts}" var="theAd">
 
@@ -73,9 +74,6 @@
 					<h:commandLink value="Delete" action="#{advertController.deleteAdvert(theAd.id)}"/>
 					
 				</h:column>
-				
-				
-
 	</h:dataTable>
 	
 	</h:form>

@@ -16,7 +16,7 @@ import com.ekrem.jsf.models.HrSpec;
  * @author ekrem
  *
  */
-@ManagedBean
+@ManagedBean (name = "hrSpecController")
 @SessionScoped
 public class HrSpecController {
 	
@@ -98,6 +98,18 @@ public class HrSpecController {
 		}
 		
 		return id;
+	}
+	
+	public HrSpec getHrSpec(long id) {
+		HrSpec hrSpec = new HrSpec();
+		try {
+			hrSpec = hrSpecDAO.getHrSpec(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return hrSpec;
+		
 	}
 
 }

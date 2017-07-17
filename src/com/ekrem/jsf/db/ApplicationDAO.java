@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.Context;
@@ -19,6 +21,7 @@ public class ApplicationDAO {
 	private static ApplicationDAO applicationInstance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/job_app_db";
+	private SimpleDateFormat format = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
 	
 	public static ApplicationDAO getApplicationInstance() throws Exception {
 		if(applicationInstance == null) applicationInstance = new ApplicationDAO();
@@ -75,9 +78,12 @@ public class ApplicationDAO {
 				long hr_id = myRs.getInt("hr_id");
 				long advert_id = myRs.getInt("advert_id");
 				long candidate_id = myRs.getInt("candidate_id");
+				Date apply_date = myRs.getDate("apply_date");
+				String cover_letter = myRs.getString("cover_letter");
+				String status = myRs.getString("status");
 				
 			
-				Application application = new Application(id, hr_id, advert_id, candidate_id);
+				Application application = new Application(id, hr_id, advert_id, candidate_id, apply_date, cover_letter, status);
 
 		
 				applications.add(application);
@@ -99,13 +105,16 @@ public class ApplicationDAO {
 		try {
 			con = dataSource.getConnection();
 
-			String sql = "insert into application (hr_id, advert_id, candidate_id) values (?, ?, ?)";
+			String sql = "insert into application (hr_id, advert_id, candidate_id, apply_date, cover_letter, status) values (?, ?, ?, ?, ?, ?)";
 
 			stmt = con.prepareStatement(sql);
 
 			stmt.setLong(1, application.getHr_id());
 			stmt.setLong(2, application.getAdvert_id());
 			stmt.setLong(3, application.getCandidate_id());
+			stmt.setString(4, format.format(application.getApply_date()));
+			stmt.setString(5, application.getCover_letter());
+			stmt.setString(6, application.getStatus());
 			
 			stmt.execute();			
 		}
@@ -140,10 +149,13 @@ public class ApplicationDAO {
 				long hr_id = rs.getInt("hr_id");
 				long advert_id = rs.getInt("advert_id");
 				long candidate_id = rs.getInt("candidate_id");
+				Date apply_date = rs.getDate("apply_date");
+				String cover_letter = rs.getString("cover_letter");
+				String status = rs.getString("status");
 			
 
 				application = new Application(id, hr_id, advert_id,
-						candidate_id);
+						candidate_id, apply_date, cover_letter, status);
 
 			}
 			else {
@@ -169,7 +181,7 @@ public class ApplicationDAO {
 			con = dataSource.getConnection();
 
 			String sql = "update application "
-						+ " set hr_id=?, advert_id=?, candidate_id=?"
+						+ " set hr_id=?, advert_id=?, candidate_id=?, apply_date=?, cover_letter=?, status=?"
 						+ " where id=?";
 
 			stmt = con.prepareStatement(sql);
@@ -178,7 +190,10 @@ public class ApplicationDAO {
 			stmt.setLong(1, application.getHr_id());
 			stmt.setLong(2, application.getAdvert_id());
 			stmt.setLong(3, application.getCandidate_id());
-			
+			stmt.setString(4, format.format(application.getApply_date()));
+			stmt.setString(5, application.getCover_letter());
+			stmt.setString(6, application.getStatus());
+			stmt.setLong(7, application.getId());
 			stmt.execute();
 		}
 		finally {
