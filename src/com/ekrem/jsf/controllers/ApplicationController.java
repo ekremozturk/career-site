@@ -11,6 +11,10 @@ import com.ekrem.jsf.db.ApplicationDAO;
 import com.ekrem.jsf.models.Application;
 import com.ekrem.jsf.models.Candidate;
 
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+
 @ManagedBean (name = "applicationController")
 @SessionScoped
 public class ApplicationController {
@@ -156,6 +160,7 @@ public class ApplicationController {
 		application.setStatus(status);
 		
 		if(getCandidate(application).getBlacklist()==0) {
+			sendEmail("ekremozturk22@gmail.com", "rejected");
 			updateApplication(application);
 		}
 		
@@ -222,7 +227,48 @@ public class ApplicationController {
 		this.statusFilter = statusFilter;
 	}
 	
+	public void sendEmail(String email, String status) {
+		// Recipient's email ID needs to be mentioned.
+	      String to = email;
 
+	      // Sender's email ID needs to be mentioned
+	      String from = "ekremozturk22@gmail.com";
+
+	      // Assuming you are sending email from localhost
+	      String host = "localhost";
+
+	      // Get system properties
+	      Properties properties = System.getProperties();
+
+	      // Setup mail server
+	      properties.setProperty("mail.smtp.host", host);
+
+	      // Get the default Session object.
+	      Session session = Session.getDefaultInstance(properties);
+
+	      try {
+	         // Create a default MimeMessage object.
+	         MimeMessage message = new MimeMessage(session);
+
+	         // Set From: header field of the header.
+	         message.setFrom(new InternetAddress(from));
+
+	         // Set To: header field of the header.
+	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+	         // Set Subject: header field
+	         message.setSubject("Status change on your application");
+
+	         // Now set the actual message
+	         message.setText(status);
+
+	         // Send message
+	         Transport.send(message);
+	         System.out.println("Sent message successfully....");
+	      }catch (MessagingException mex) {
+	         mex.printStackTrace();
+	      }
+	}
 	
 
 }

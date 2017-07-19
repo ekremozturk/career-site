@@ -35,32 +35,43 @@
 	
 		<div class="row">
 			<div class="col-md-12">
+				<h:form>
 			
 				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
 				
 				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
 				
-				<h:button class="btn btn-primary" style="color: white" value="Add Advert" outcome="add_advert"/>
-				
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Add Advert" outcome="add_advert"/>
+			
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{hraccess.logout()}"/>			
+				</h:form>	
 			</div>
 		</div>
 		
 		<br></br>
 	
 	<div class="row lead" style="margin-left:8px">
-	
-	Name: <h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
-	<br></br>
-	Surname: <h:outputText value="#{candidateController.theCandidate.surname}"></h:outputText>
-	<br></br>
-	Headline: <h:outputText value="#{candidateController.theCandidate.headline}"></h:outputText>
-	<br></br>
-	Skills: <h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
-	<br></br>
-	Status: <h:outputText value="#{candidateController.theCandidate.isBlacklisted()}"></h:outputText>
-	<br></br>
+		<div class="col-md-2">
+			<img src="#{candidateController.theCandidate.pictureUrl}" />
+			<h4>#{candidateController.theCandidate.numConnections} connections</h4>
+		</div>
+		<div class="col-md-10">
+			Name: <h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
+			<br></br>
+			Surname: <h:outputText value="#{candidateController.theCandidate.surname}"></h:outputText>
+			<br></br>
+			Headline: <h:outputText value="#{candidateController.theCandidate.headline}"></h:outputText>
+			<br></br>
+			Skills: <h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
+			<br></br>
+			Status: <h:outputText value="#{candidateController.theCandidate.isBlacklisted()}"></h:outputText>
+			<br></br>
+			Email: <h:outputText value="#{candidateController.theCandidate.email}"></h:outputText>
+			<br></br>
+			Summary: <h:outputText value="#{candidateController.theCandidate.summary}"></h:outputText>
+		<br></br>
+		</div>
 	</div>
-	
 	<h3 class="text-center">Other Job Applications of #{candidateController.theCandidate.name}</h3>
 	
 	<h:form>			

@@ -3,6 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  
+<f:metadata>
+	<f:event type="preRenderView" listener="#{candidateController.loadTheCandidate(candidateController.getCandidate(access.id).id)}"/>
+</f:metadata>
 
 <h:head>
 
@@ -17,17 +21,53 @@
 </h:head>
 
 <h:body>
-
-	<div class="container">
+	
+		<div class="container">
+	<div class="row">
+	
+			<div class="col-md-12">
+				<h3>#{candidateController.theCandidate.name}'s Profile</h3>
+			</div>
+		</div>
+	
+		<hr class="colorgraph"></hr>
 	
 		<div class="row">
-			<div class="col-md-6">
-				<h:button value="Homepage" outcome="home"/>
+			<div class="col-md-12">
+			<h:form>
+				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="My Applications" outcome="applications"/>
+				
+				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="My Profile" outcome="profile"/>
+				
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{access.logout()}"/>
+				</h:form>
 			</div>
-			<div class="col-md-6">
-			</div>
-			<h:button value="Homepage" outcome="applications"/>
 		</div>
+		
+		<br></br>
+	
+	<div class="row lead" style="margin-left:8px">
+		<div class="col-md-2">
+			<img src="#{candidateController.theCandidate.pictureUrl}" />
+			<h4>#{candidateController.theCandidate.numConnections} connections</h4>
+		</div>
+		<div class="col-md-10">
+			Name: <h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
+			<br></br>
+			Surname: <h:outputText value="#{candidateController.theCandidate.surname}"></h:outputText>
+			<br></br>
+			Headline: <h:outputText value="#{candidateController.theCandidate.headline}"></h:outputText>
+			<br></br>
+			Skills: <h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
+			<br></br>
+			Email: <h:outputText value="#{candidateController.theCandidate.email}"></h:outputText>
+			<br></br>
+			Summary: <h:outputText value="#{candidateController.theCandidate.summary}"></h:outputText>
+			<br></br>
+		</div>
+	</div>	
 		
 	</div>
 	

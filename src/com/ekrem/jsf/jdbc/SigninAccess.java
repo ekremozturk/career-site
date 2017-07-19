@@ -26,8 +26,14 @@ public class SigninAccess {
 		HrSpecController hrSpecController = new HrSpecController();
 		
 		id = hrSpecController.getId(company, password);
-		
+		System.out.println(id);
 		return "HR/home?faces-redirect=true";
+	}
+	
+	public String logout() {
+		System.out.println("aa");
+		id = -1;
+		return "/sign_in?faces-redirect=true";
 	}
 
 }

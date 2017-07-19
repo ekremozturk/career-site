@@ -22,7 +22,7 @@ import com.github.scribejava.core.model.Verb;
 @SessionScoped
 public class LinkedInAccess {
 	
-	final String query = "";
+	String query = "";
 	private String code;
 	private String id = "no-login";
 	private static final String PROTECTED_RESOURCE_URL = "https://api.linkedin.com/v1/people/~:(id,headline,picture-url,specialties,summary,first-name,last-name,email-address)?format=json";
@@ -134,6 +134,11 @@ public class LinkedInAccess {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String logout() {
+		query = ""; code = ""; id = "no-login";
+		return "/sign_in?faces-redirect=true";
 	}
 
 }
