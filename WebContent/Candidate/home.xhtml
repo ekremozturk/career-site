@@ -5,20 +5,50 @@
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
 	  
 <f:metadata>
-  <f:event type="preRenderView" listener="#{advertController.loadAdverts()}"/>
+	<f:event type="preRenderView" listener="#{advertController.loadAdverts()}"/>
 </f:metadata>
 
 <h:head>
 
 	<title>Home</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
+	
 </h:head>
 
 <h:body>
-
-	<h:button value="Applications" outcome="applications"/>
+	<div class="container">
 	
-	<h:dataTable value="#{advertController.activeAdverts}" var="theAd">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Welcome, #{candidateController.getCandidate(access.id).name}</h3>
+		</div>
+	</div>
+	
+	<hr class="colorgraph"></hr>
+	
+	<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary border-radius" style="color: white" value="My Applications" outcome="applications"/>
+				
+			</div>
+	</div>
+	
+	<br></br>
+	
+	<div class="row">
+	
+	<h:dataTable value="#{advertController.activeAdverts}" var="theAd"
+				styleClass="demo-table" 
+				headerClass="demo-table-header"
+				rowClasses="demo-table-odd-row,demo-table-even-row">
 
 				<h:column>
 					<!-- the column header -->
@@ -55,9 +85,9 @@
 
 			</h:dataTable>
 			
-			#{access.id}
+		</div>
 			
-	
+	</div>
 </h:body>
 
 </html>

@@ -12,29 +12,72 @@
 
 	<title>Welcome</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
-
-	<div>
-		<h:form>
+	<div class="container">
+		<div class="wrapper">
 		
+		<h:form class="form-signin">
+			
+			<h3 class="form-signin-heading">Company Sign-in</h3>
+			
+			<hr class="colorgraph"/>
+			
+			<br></br>
+			
+			<div class="row form-control">
 			<h:outputLabel>Company: </h:outputLabel> 
 			<h:inputText value="#{hrspec.company}" id="company" required="true"/>
 			<h:message for="company" />
-		
+			</div>
+			
+			<br></br>
+			
+			<div class="row form-control">
 			<h:outputLabel>Password: </h:outputLabel> 
 			<h:inputSecret value="#{hrspec.password}" id="password" required="true"/>
 			<h:message for="password" />
-		
-			<h:commandButton value="Log in" action="#{hraccess.SignIn(hrspec.company, hrspec.password)}"/>
-		
+			</div>
+			
+			<br></br>
+			
+			<div id="row">
+			<h:commandButton class="btn btn-lg btn-primary btn-block center-block" value="Log in" action="#{hraccess.SignIn(hrspec.company, hrspec.password)}"/>
+			</div>
+			
+			<br></br>
+			
+			<h3 class="form-signin-heading">Looking for  job?</h3>
+			
+			<hr class="colorgraph"/>
+			
+			<br></br>
+			
+			<div class="row col-md-6 center-block">
+			<h:outputLink value="#{auth.main()}"> <h:graphicImage library="images" name="sign-in-small.png" /> </h:outputLink>
+			</div>
+			
+			
+			
 		</h:form>
-	</div>
+		
+		</div>
 	
-	<h:outputLink value="#{auth.main()}"> Sign-in via Linkedin </h:outputLink>
-	<h:form>	
-	<h:dataTable value="#{advertController.activeAdverts}" var="theAd">
+	
+	
+	<div class="row wrapper-job-list">
+		<h3 class="text-center">Active Job Adverts</h3>
+		<h:form class = "wrapper-job-list">
+		
+		<h:dataTable value="#{advertController.activeAdverts}" var="theAd"
+				styleClass="demo-table" 
+				headerClass="demo-table-header"
+				rowClasses="demo-table-odd-row,demo-table-even-row">
 
 				<h:column>
 					<!-- the column header -->
@@ -42,6 +85,14 @@
 
 					<!--  the value for each row -->
 					#{theAd.code}
+				</h:column>
+				
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header">Company</f:facet>
+
+					<!--  the value for each row -->
+					#{hrSpecController.getHrSpec(theAd.hr_id).company}
 				</h:column>
 
 				<h:column>
@@ -71,7 +122,13 @@
 
 			</h:dataTable>
 	
-	</h:form>
+			</h:form>
+		</div>
+		
+		<div class="row">
+		<hr></hr>
+		</div>
+	</div>
 </h:body>
 
 </html>

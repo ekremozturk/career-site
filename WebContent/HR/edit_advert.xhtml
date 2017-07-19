@@ -11,45 +11,100 @@
 
 <h:head>
 
-	<title>Edit Advert Form</title>
+	<title>Edit Advert</title>
+	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
 	
 </h:head>
 
 <h:body>
+	<div class="container">
+	
+	<div class="row">
+	
+			<div class="col-md-12">
+				<h3>Edit #{advertController.theAdvert.head}</h3>
+			</div>
+		</div>
+	
+		<hr class="colorgraph"></hr>
+	
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
+				
+				<h:button class="btn btn-primary" style="color: white" value="Add Advert" outcome="add_advert"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
 
 	Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
-	<br></br>
-	Title: <h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
+	
 	<br></br>
 	
-	<h:form>
+	<h:form class="form-control form-horizontal">
 	
-	<h:outputLabel>Title:</h:outputLabel> <h:inputText value="#{advert.head}" id="head" 
+	<div class="form-group">
+	<h:outputLabel>Title:</h:outputLabel> 
+	<br></br>
+	<h:inputText value="#{advert.head}" id="head" 
 	required="true"/> 
 	<h:message for="head" />
+	</div>
 	
-	<h:outputLabel>Description:</h:outputLabel> <h:inputText value="#{advert.description}" id="description" 
+	<br></br>
+	
+	<div class="form-group">
+	<h:outputLabel>Description:</h:outputLabel> 
+	<br></br>
+	<h:inputText value="#{advert.description}" id="description" 
 	required="true"/> 	
     <h:message for="description" />
+    </div>
     
-    <h:outputLabel>Required Skills:</h:outputLabel> <h:inputText value="#{advert.req_skills}" id="req_skills" 
+    <br></br>
+    
+    <div class="form-group">
+    <h:outputLabel>Required Skills:</h:outputLabel> 
+    <br></br>
+    <h:inputText value="#{advert.req_skills}" id="req_skills" 
     required="true"/> 
 	<h:message for="req_skills" />
+	</div>
 	
-	<h:outputLabel>Open Until:</h:outputLabel> <h:inputText value="#{advert.close_time}" id="close_time" 
+	<br></br>
+	
+	<div class="form-group">
+	<h:outputLabel>Open Until:</h:outputLabel> 
+	<br></br>
+	<h:inputText value="#{advert.close_time}" id="close_time" 
     required="true"/> 
 	<h:message for="close_time" />
+	</div>
 	
+	<br></br>
+	
+	<div class="form-group">
 	<h:selectBooleanCheckbox value = "#{advert.active}">Active?:</h:selectBooleanCheckbox>
+	</div>
 	
-	<h:commandButton value="Post" action="#{advertController.updateAdvert(advert)}"/>
+	<br></br>
+	
+	<div class="form-group">
+	<h:commandButton class="btn btn-primary" style="color: white" value="Post changes" action="#{advertController.updateAdvert(advert)}"/>
+	</div>
 	
 	</h:form>
 	
-	<!--#{access.id} -->
-	
-	<p><h:outputLink value="home.xhtml">Home</h:outputLink></p>
-	
+	</div>
 </h:body>
 
 </html>

@@ -3,15 +3,18 @@
  */
 package com.ekrem.jsf.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.convert.FacesConverter;
 
 /**
  * @author ekrem
  *
  */
 @ManagedBean (name = "advert")
+@FacesConverter(forClass=Advert.class)
 public class Advert {
 	
 	private long id;

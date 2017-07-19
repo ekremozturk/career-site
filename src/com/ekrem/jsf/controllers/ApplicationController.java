@@ -155,8 +155,10 @@ public class ApplicationController {
 		
 		application.setStatus(status);
 		
-		if(getCandidate(application).getBlacklist()==0)
-		updateApplication(application);
+		if(getCandidate(application).getBlacklist()==0) {
+			updateApplication(application);
+		}
+		
 		
 		return "applications?faces-redirect=true";
 	}

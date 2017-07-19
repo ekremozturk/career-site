@@ -12,12 +12,40 @@
 
 	<title>Advert Info</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
+	
 </h:head>
 
 <h:body> 
+
+	<div class="container">
+
+	<div class="row">
+			<div class="col-md-12">
+				<h3>Advert #{advertController.theAdvert.head}</h3>
+			</div>
+		</div>
 	
-	<p><h:outputLink value="home.xhtml">Home</h:outputLink></p>
+		<hr class="colorgraph"></hr>
 	
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary border-radius" style="color: white" value="My Applications" outcome="applications"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
+		
+		
+	<div class="row lead" style="margin-left:8px">
 	Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
 	<br></br>
 	Title: <h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
@@ -32,18 +60,22 @@
 	<br></br>
 	Company: <h:outputText value="#{advertController.theAdvert.hr_id}"></h:outputText>
 	<br></br>
-	
+	</div>
 	<h:outputLabel>Cover Letter:</h:outputLabel>
 	
 	<h:form>
-	 <h:inputTextarea value="#{app.cover_letter}" id="cover_letter" /> 
+	<h:inputTextarea value="#{app.cover_letter}" id="cover_letter" /> 
 	<h:message for="cover letter" />
 	
-	<h:commandButton value="Apply" 
+	<br></br>
+	<br></br>
+	
+	<h:commandButton class="btn btn-primary border-radius"
+					 style="color: white; margin-right:16px;" value="Apply" 
 	action="#{applicationController.addApplication(advertController.theAdvert.hr_id, advertController.theAdvert.id, candidateController.getCandidate(access.id).id, app.cover_letter)}"/>
 	</h:form>
 	
-	
+	</div>
 
 </h:body>
 

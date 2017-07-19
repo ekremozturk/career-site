@@ -25,7 +25,7 @@ public class LinkedInAccess {
 	final String query = "";
 	private String code;
 	private String id = "no-login";
-	private static final String PROTECTED_RESOURCE_URL = "https://api.linkedin.com/v1/people/~?format=json";
+	private static final String PROTECTED_RESOURCE_URL = "https://api.linkedin.com/v1/people/~:(id,headline,picture-url,specialties,summary,first-name,last-name,email-address)?format=json";
 	
 	
 	public LinkedInAccess() {
@@ -57,12 +57,18 @@ public class LinkedInAccess {
         System.out.println(response.getBody());
         
         Candidate candidate = new Candidate();
-        candidate.setName(properties.get(0));
-        candidate.setHeadline(properties.get(1));
-        candidate.setLink_id(properties.get(2));
-        candidate.setSurname(properties.get(3));
+
+        candidate.setEmail(properties.get(0));
+        candidate.setName(properties.get(1));
+        candidate.setHeadline(properties.get(2));
+        candidate.setLink_id(properties.get(3));
+        candidate.setSurname(properties.get(4));
+        candidate.setPictureUrl(properties.get(5));
+        candidate.setSummary(properties.get(6));
+        candidate.setNumConnections("192");
+        candidate.setBlacklist(0);
         
-        id = properties.get(2);
+        id = properties.get(3);
         
         try {
 			CandidateController cCont = new CandidateController();
@@ -97,12 +103,18 @@ public class LinkedInAccess {
 	
 	public ArrayList<String> JSONParser(String body) {
 		ArrayList<String> properties = new ArrayList<>();
-		for(int i=0; i<4; i++) {
+		for(int i=0; i<6; i++) {
 			int begin = body.indexOf(":");
 			body = body.substring(begin+2);
 			int end = body.indexOf(",");
 			properties.add(body.substring(1, end-1));
+			body = body.substring(end);
 		}
+		
+		int begin = body.indexOf(":");
+		body = body.substring(begin+2);
+		int end = body.indexOf("}");
+		properties.add(body.substring(1, end-1));
 		
 		return properties;
 	}

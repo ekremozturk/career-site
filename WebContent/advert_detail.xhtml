@@ -13,14 +13,35 @@
 
 	<title>Advert Info</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
+	<div class="container">
+	<div class="row">
 	
-	<!--#{access.id} -->
+			<div class="col-md-12">
+				<h3>Advert #{advertController.theAdvert.head}</h3>
+			</div>
+		</div>
 	
-	<p><h:outputLink value="sign_in.xhtml">Home</h:outputLink></p>
+		<hr class="colorgraph"></hr>
 	
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Sign-in Page" outcome="sign_in"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
+
+	<div class="row lead" style="margin-left:0px">
 	Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
 	<br></br>
 	Title: <h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
@@ -35,7 +56,9 @@
 	<br></br>
 	Company: <h:outputText value="#{advertController.theAdvert.hr_id}"></h:outputText>
 	<br></br>
-
+	</div>
+	<h3>Please, login to apply!</h3>
+	</div>
 </h:body>
 
 </html>

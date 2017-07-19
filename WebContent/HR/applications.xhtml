@@ -13,9 +13,38 @@
 
 	<title>Applications</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
+	<div class="container">
+
+	<div class="row">
+	
+			<div class="col-md-12">
+				<h3>Applications Made on #{hrSpecController.getHrSpec(hraccess.id).company}'s Adverts</h3>
+			</div>
+		</div>
+	
+		<hr class="colorgraph"></hr>
+	
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
+				
+				<h:button class="btn btn-primary" style="color: white" value="Add Advert" outcome="add_advert"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
 
 	<h:form>	
 	
@@ -29,10 +58,15 @@
 				<f:selectItem itemLabel="Rejected" itemValue="Rejected" />
 			</h:selectOneMenu>
 			
-			<h:commandButton value="Filter" action="#{applicationController.filterResults()}" />
+			<h:commandButton class="btn btn-primary" style="color: white; margin-left:16px;" value="Filter" action="#{applicationController.filterResults()}" />
 		</h:form>
 		
-		<h:dataTable value="#{applicationController.companyApplications}" var="theApp">
+		<br></br>
+		
+		<h:dataTable value="#{applicationController.companyApplications}" var="theApp"
+				styleClass="demo-table" 
+				headerClass="demo-table-header"
+				rowClasses="demo-table-odd-row,demo-table-even-row">
 
 				<h:column>
 					<!-- the column header -->
@@ -108,6 +142,8 @@
 		</h:dataTable>
 	
 	</h:form>
+	
+	</div>
 </h:body>
 
 </html>

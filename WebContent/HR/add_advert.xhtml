@@ -12,38 +12,96 @@
 
 	<title>Post Advert Form</title>
 	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" />
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	
+	<h:outputScript library="js" name="formatDatePicker.js" />
+	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
+	<div class="container">
 	
-	<h:form>
+	<div class="row">
 	
-	<h:outputLabel>Title:</h:outputLabel> <h:inputText value="#{advert.head}" id="head" 
-	required="true"/> 
+			<div class="col-md-12">
+				<h3>Post an Advert</h3>
+			</div>
+		</div>
+	
+		<hr class="colorgraph"></hr>
+	
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
+				
+				<h:button class="btn btn-primary" style="color: white" value="Add Advert" outcome="add_advert"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
+	
+	<h:form class="form-control form-horizontal">
+	
+	<div class="form-group">
+	<h:outputLabel>Title: </h:outputLabel> 
+	<br></br>
+	<h:inputText value="#{advert.head}" id="head" required="true"/> 
 	<h:message for="head" />
+	</div>
 	
-	<h:outputLabel>Description:</h:outputLabel> <h:inputText value="#{advert.description}" id="description" 
-	required="true"/> 	
+	<br></br>
+	
+	<div class="form-group">
+	<h:outputLabel>Description: </h:outputLabel>
+	<br></br> 
+	<h:inputTextarea value="#{advert.description}" id="description" required="true"/> 	
     <h:message for="description" />
+    </div>
     
-    <h:outputLabel>Required Skills:</h:outputLabel> <h:inputText value="#{advert.req_skills}" id="req_skills" 
-    required="true"/> 
+    <br></br>
+    
+    <div class="form-group">
+    <h:outputLabel>Required Skills: </h:outputLabel> 
+    <br></br>
+    <h:inputText value="#{advert.req_skills}" id="req_skills" required="true"/> 
 	<h:message for="req_skills" />
+	</div>
 	
-	<h:outputLabel>Open Until:</h:outputLabel> <h:inputText value="#{advert.close_time}" id="close_time" 
-    required="true"/> 
+	<br></br>
+	
+	<div class="form-group">
+	<h:outputLabel>Open Until: </h:outputLabel> 
+	<br></br>
+	<h:inputText styleClass="form-control datepicker" value="#{advert.close_time}" id="close_time" required="true"/>
 	<h:message for="close_time" />
+	</div>
 	
-	<h:selectBooleanCheckbox value = "#{advert.active}">Active?:</h:selectBooleanCheckbox>
+	<br></br>
 	
-	<h:commandButton value="Post" action="#{advertController.addAdvert(advert)}"/>
+	<div class="form-group">
+	<h:selectBooleanCheckbox value = "#{advert.active}">Active?: </h:selectBooleanCheckbox>
+	</div>
+	
+	<br></br>
+	
+	<div class="form-group">
+	<h:commandButton class="btn btn-primary" style="color: white; margin-right:16px;" value="Post Advert" action="#{advertController.addAdvert(advert)}"/>
+	</div>
 	
 	</h:form>
 	
-	<!--#{access.id} -->
-	
-	<p><h:outputLink value="home.xhtml">Home</h:outputLink></p>
-	
+	</div>
 </h:body>
 
 </html>

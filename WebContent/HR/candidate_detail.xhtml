@@ -15,15 +15,39 @@
 
 	<title>Candidate Info</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
+	<div class="container">
+	<div class="row">
 	
-	<!--#{access.id} -->
+			<div class="col-md-12">
+				<h3>#{candidateController.theCandidate.name}'s Profile</h3>
+			</div>
+		</div>
 	
-	<p>	<h:button value="Home" outcome="home"/></p>
+		<hr class="colorgraph"></hr>
 	
-	<p><h:button value="Applications" outcome="applications"/></p>
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
+				
+				<h:button class="btn btn-primary" style="color: white" value="Add Advert" outcome="add_advert"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
+	
+	<div class="row lead" style="margin-left:8px">
 	
 	Name: <h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
 	<br></br>
@@ -35,9 +59,15 @@
 	<br></br>
 	Status: <h:outputText value="#{candidateController.theCandidate.isBlacklisted()}"></h:outputText>
 	<br></br>
+	</div>
+	
+	<h3 class="text-center">Other Job Applications of #{candidateController.theCandidate.name}</h3>
 	
 	<h:form>			
-		<h:dataTable value="#{applicationController.candidateApplications}" var="theApp">
+		<h:dataTable value="#{applicationController.candidateApplications}" var="theApp"
+				styleClass="demo-table" 
+				headerClass="demo-table-header"
+				rowClasses="demo-table-odd-row,demo-table-even-row">
 
 				<h:column>
 					<!-- the column header -->
@@ -82,6 +112,8 @@
 				
 		</h:dataTable>
 		
+			<br></br>
+		
 			<h:form>
 
 			Blacklist: 
@@ -90,12 +122,13 @@
 				<f:selectItem itemLabel="No" itemValue="No" />
 			</h:selectOneMenu>
 
-		    <h:commandButton value="Submit" action="#{candidateController.blacklist(candidateController.theCandidate)}" />
+		     <h:commandButton class="btn btn-primary" style="color: white; margin-left:16px;" value="Submit" action="#{candidateController.blacklist(candidateController.theCandidate)}" />
 
 		</h:form>
 	
 	</h:form>
 	
+	</div>
 </h:body>
 
 </html>

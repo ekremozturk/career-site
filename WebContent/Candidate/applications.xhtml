@@ -13,12 +13,43 @@
 
 	<title>Applications</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
 
-	<h:form>			
-	<h:dataTable value="#{applicationController.candidateApplications}" var="theApp">
+	<div class="container">
+	
+		<div class="row">
+			<div class="col-md-12">
+				<h3>#{candidateController.getCandidate(access.id).name}'s Job Applications</h3>
+			</div>
+		</div>
+	
+		<hr class="colorgraph"></hr>
+	
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary border-radius" style="color: white" value="My Applications" outcome="applications"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
+	
+		<h:form>			
+		
+			<h:dataTable value="#{applicationController.candidateApplications}" var="theApp"
+				styleClass="demo-table" 
+				headerClass="demo-table-header"
+				rowClasses="demo-table-odd-row,demo-table-even-row">
 
 				<h:column>
 					<!-- the column header -->
@@ -55,9 +86,12 @@
 					
 				</h:column>
 				
-	</h:dataTable>
+			</h:dataTable>
 	
-	</h:form>
+		</h:form>
+		
+	</div>
+	
 </h:body>
 
 </html>

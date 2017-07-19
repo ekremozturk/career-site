@@ -84,10 +84,14 @@ public class CandidateDAO {
 				String headline = myRs.getString("headline");
 				String link_id = myRs.getString("link_id");
 				String skills = myRs.getString("skills");
+				String email= myRs.getString("email");
+				String pictureUrl = myRs.getString("pictureUrl");
+				String summary = myRs.getString("summary");
+				String numConnections = myRs.getString("numConnections");
 				int blacklist = myRs.getInt("blacklist");
 			
 				Candidate candidate = new Candidate(id, name, surname,
-						headline, link_id, skills, blacklist);
+						headline, link_id, skills, email, pictureUrl, summary, numConnections, blacklist);
 
 		
 				candidates.add(candidate);
@@ -109,7 +113,7 @@ public class CandidateDAO {
 		try {
 			con = dataSource.getConnection();
 
-			String sql = "insert into candidate (name, surname, headline, link_id, skills) values (?, ?, ?, ?, ?)";
+			String sql = "insert into candidate (name, surname, headline, link_id, skills, email, pictureUrl, summary, numConnections, blacklist) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			stmt = con.prepareStatement(sql);
 
@@ -118,6 +122,11 @@ public class CandidateDAO {
 			stmt.setString(3, candidate.getHeadline());
 			stmt.setString(4, candidate.getLink_id());
 			stmt.setString(5, candidate.getSkills());
+			stmt.setString(6, candidate.getEmail());
+			stmt.setString(7, candidate.getPictureUrl());
+			stmt.setString(8, candidate.getSummary());
+			stmt.setString(9, candidate.getNumConnections());
+			stmt.setInt(10, candidate.getBlacklist());
 			
 			stmt.execute();			
 		}
@@ -154,10 +163,14 @@ public class CandidateDAO {
 				String headline = rs.getString("headline");
 				String link_id = rs.getString("link_id");
 				String skills = rs.getString("skills");
+				String email= rs.getString("email");
+				String pictureUrl = rs.getString("pictureUrl");
+				String summary = rs.getString("summary");
+				String numConnections = rs.getString("numConnections");
 				int blacklist = rs.getInt("blacklist");
 
 				candidate = new Candidate(id, name, surname,
-						headline, link_id, skills, blacklist);
+						headline, link_id, skills, email, pictureUrl, summary, numConnections, blacklist);
 
 			}
 			else {
@@ -254,10 +267,14 @@ public class CandidateDAO {
 				String surname = rs.getString("surname");
 				String headline = rs.getString("headline");
 				String skills = rs.getString("skills");
+				String email= rs.getString("email");
+				String pictureUrl = rs.getString("pictureUrl");
+				String summary = rs.getString("summary");
+				String numConnections = rs.getString("numConnections");
 				int blacklist= rs.getInt("blacklist");
 
 				candidate = new Candidate(id, name, surname,
-						headline, link_id, skills, blacklist);
+						headline, link_id, skills, email, pictureUrl, summary, numConnections, blacklist);
 
 			}
 			else {

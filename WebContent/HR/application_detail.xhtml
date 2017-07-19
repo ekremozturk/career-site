@@ -13,30 +13,61 @@
 
 	<title>Application Info</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
+	<div class="container">
 	
-	<!--#{access.id} -->
+	<div class="row">
 	
-	<p>	<h:button value="Home" outcome="home"/></p>
+			<div class="col-md-12">
+				<h3>Application Made on 
+				#{advertController.getAdvert(applicationController.theApplication.advert_id).head} by
+				#{candidateController.getCandidate(applicationController.theApplication.candidate_id).name}</h3>
+			</div>
+		</div>
 	
-	<p><h:button value="Applications" outcome="applications"/></p>
+		<hr class="colorgraph"></hr>
 	
-	Company: <h:outputText value="#{hrSpecController.getHrSpec(applicationController.theApplication.hr_id).company}"></h:outputText>
-	<br></br>
-	Candidate Name: <h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).name}"></h:outputText>
-	<br></br>
-	Candidate Surname: <h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).surname}"></h:outputText>
-	<br></br>
-	Advert: <h:outputText value="#{advertController.getAdvert(applicationController.theApplication.advert_id).head}"></h:outputText>
-	<br></br>
-	Applied at: <h:outputText value="#{applicationController.theApplication.apply_date}"></h:outputText>
-	<br></br>
-	Status: <h:outputText value="#{applicationController.theApplication.status}"></h:outputText>
-	<br></br>
-	<p><h:button value="Go to Candidate's Details" outcome="candidate_detail"><f:param name="pid" value="#{applicationController.theApplication.candidate_id}" /></h:button></p>
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
+				
+				<h:button class="btn btn-primary" style="color: white" value="Add Advert" outcome="add_advert"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
 	
+	<div class="row lead" style="margin-left:8px">
+	
+		Company: <h:outputText value="#{hrSpecController.getHrSpec(applicationController.theApplication.hr_id).company}"></h:outputText>
+		<br></br>
+		Candidate Name: <h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).name}"></h:outputText>
+		<br></br>
+		Candidate Surname: <h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).surname}"></h:outputText>
+		<br></br>
+		Advert: <h:outputText value="#{advertController.getAdvert(applicationController.theApplication.advert_id).head}"></h:outputText>
+		<br></br>
+		Applied at: <h:outputText value="#{applicationController.theApplication.apply_date}"></h:outputText>
+		<br></br>
+		Status: <h:outputText value="#{applicationController.theApplication.status}"></h:outputText>
+		<br></br>
+	</div>
+	
+	<p><h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Go to Candidate's Details" outcome="candidate_detail"><f:param name="pid" value="#{applicationController.theApplication.candidate_id}" /></h:button></p>
+	
+	</div>
+
 </h:body>
 
 </html>

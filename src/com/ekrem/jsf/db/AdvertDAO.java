@@ -29,8 +29,7 @@ public class AdvertDAO {
 	private static AdvertDAO advertInstance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/job_app_db";
-	private SimpleDateFormat format = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
-	
+	private SimpleDateFormat format = new SimpleDateFormat ("yyyy.MM.dd");
 	
 	
 	public static AdvertDAO getAdvertInstance() throws Exception {
@@ -105,58 +104,6 @@ public class AdvertDAO {
 			rs.close();
 		}
 	}
-	
-	/**
-	public List<Advert> getCompanyAdverts(long hr_id) throws Exception{
-		List<Advert> ads = new ArrayList<>();
-
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		
-		try {
-			
-			con = dataSource.getConnection();
-
-			String sql = "select * from job_advert where hr_id=?";
-
-			stmt = con.prepareStatement(sql);
-
-			stmt.setLong(1, hr_id);
-			
-			rs = stmt.executeQuery(sql);
-
-			// process result set
-			while (rs.next()) {
-				
-				// retrieve data from result set row
-				long id = rs.getInt("id");
-				String code = rs.getString("code");
-				String head = rs.getString("head");
-				String description = rs.getString("description");
-				String skills = rs.getString("skills");
-				Date open_time = rs.getDate("open_time");
-				String close_time = rs.getString("close_time");
-				int active_i = rs.getInt("active");
-				boolean active=false;
-				if(active_i == 1) active = true;
-				Advert ad = new Advert(id, code, head,
-						description, skills, open_time, close_time, hr_id, active);
-
-		
-				ads.add(ad);
-			}
-			
-			return ads;		
-		}
-		finally {
-			con.close();
-			stmt.close();
-			rs.close();
-		}
-	}
-	*/
-	
 	
 	public void addAdvert(Advert advert) throws Exception {
 		Connection con = null;

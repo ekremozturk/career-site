@@ -13,70 +13,81 @@
 
 	<title>Home</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
-	<h:button value="Add Advert" outcome="add_advert"/>
-	<h:button value="Applications" outcome="applications"/>
-	<h:form>			
-	<h:dataTable value="#{advertController.companyAdverts}" var="theAd">
+	<div class="container">
+	
+	<div class="row">
+	
+			<div class="col-md-12">
+				<h3>Welcome, #{hrSpecController.getHrSpec(hraccess.id).company}</h3>
+			</div>
+		</div>
+	
+		<hr class="colorgraph"></hr>
+	
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
+				
+				<h:button class="btn btn-primary" style="color: white" value="Add Advert" outcome="add_advert"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
+	
+		<h:form>			
+		<h:dataTable value="#{advertController.companyAdverts}" var="theAd"
+				styleClass="demo-table" 
+				headerClass="demo-table-header"
+				rowClasses="demo-table-odd-row,demo-table-even-row">
 
 				<h:column>
-					<!-- the column header -->
 					<f:facet name="header">Code</f:facet>
-
-					<!--  the value for each row -->
 					#{theAd.code}
 				</h:column>
 
 				<h:column>
-					<!-- the column header -->
 					<f:facet name="header">Title</f:facet>
-
-					<!--  the value for each row -->
 					#{theAd.head}
 				</h:column>
 
 				<h:column>
-					<!-- the column header -->
 					<f:facet name="header">Open Until</f:facet>
-
-					<!--  the value for each row -->
 					#{theAd.close_time}
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
 					<f:facet name="header"></f:facet>
-
-					<!--  the value for each row -->
 					<h:outputLink value ="advert_detail.xhtml">
 					<f:param name="pid" value="#{theAd.id}" />More Info</h:outputLink>
-					
-					
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
 					<f:facet name="header"></f:facet>
-
-					<!--  the value for each row -->
 					<h:outputLink value ="edit_advert.xhtml">
 					<f:param name="pid" value="#{theAd.id}" />Edit</h:outputLink>
-					
 				</h:column>
 				
-				<h:column>
-					<!-- the column header -->
+				<h:column>	
 					<f:facet name="header"></f:facet>
-
-					<!--  the value for each row -->
 					<h:commandLink value="Delete" action="#{advertController.deleteAdvert(theAd.id)}"/>
 					
 				</h:column>
 	</h:dataTable>
 	
 	</h:form>
+	</div>
 </h:body>
 
 </html>

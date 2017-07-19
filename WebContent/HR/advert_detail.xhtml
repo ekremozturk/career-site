@@ -13,29 +13,57 @@
 
 	<title>Advert Info</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
 </h:head>
 
 <h:body>
+	<div class="container">
 	
-	<!--#{access.id} -->
 	
-	<p><h:outputLink value="home.xhtml">Home</h:outputLink></p>
+	<div class="row">
 	
-	Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
-	<br></br>
-	Title: <h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
-	<br></br>
-	Description: <h:outputText value="#{advertController.theAdvert.description}"></h:outputText>
-	<br></br>
-	Required Skills: <h:outputText value="#{advertController.theAdvert.req_skills}"></h:outputText>
-	<br></br>
-	Opened At: <h:outputText value="#{advertController.theAdvert.open_time}"></h:outputText>
-	<br></br>
-	Open Until: <h:outputText value="#{advertController.theAdvert.close_time}"></h:outputText>
-	<br></br>
-	Company: <h:outputText value="#{advertController.theAdvert.hr_id}"></h:outputText>
-	<br></br>
-
+			<div class="col-md-12">
+				<h3>Advert #{advertController.theAdvert.head}</h3>
+			</div>
+		</div>
+	
+		<hr class="colorgraph"></hr>
+	
+		<div class="row">
+			<div class="col-md-12">
+			
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
+				
+				<h:button class="btn btn-primary" style="color: white" value="Add Advert" outcome="add_advert"/>
+				
+			</div>
+		</div>
+		
+		<br></br>
+	
+		<div class="row lead" style="margin-left:8px">
+			Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
+			<br></br>
+			Title: <h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
+			<br></br>
+			Description: <h:outputText value="#{advertController.theAdvert.description}"></h:outputText>
+			<br></br>
+			Required Skills: <h:outputText value="#{advertController.theAdvert.req_skills}"></h:outputText>
+			<br></br>
+			Opened At: <h:outputText value="#{advertController.theAdvert.open_time}"></h:outputText>
+			<br></br>
+			Open Until: <h:outputText value="#{advertController.theAdvert.close_time}"></h:outputText>
+			<br></br>
+			Company: <h:outputText value="#{advertController.theAdvert.hr_id}"></h:outputText>
+			<br></br>
+		</div>
+	</div>
 </h:body>
 
 </html>

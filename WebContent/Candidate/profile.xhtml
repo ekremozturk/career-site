@@ -8,13 +8,28 @@
 
 	<title>Profile Page</title>
 	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
+	
 </h:head>
 
 <h:body>
+
+	<div class="container">
 	
-	<!--#{access.id} -->
-	
-	<p><h:outputLink value="home.xhtml">Home</h:outputLink></p>
+		<div class="row">
+			<div class="col-md-6">
+				<h:button value="Homepage" outcome="home"/>
+			</div>
+			<div class="col-md-6">
+			</div>
+			<h:button value="Homepage" outcome="applications"/>
+		</div>
+		
+	</div>
 	
 </h:body>
 
