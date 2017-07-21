@@ -29,7 +29,6 @@ public class LinkedInAuth {
                 .build(LinkedInAPI.instance());
 
         final String authorizationUrl = service.getAuthorizationUrl();
-        System.out.println(authorizationUrl);
         
 		return authorizationUrl;
     }

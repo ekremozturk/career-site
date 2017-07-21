@@ -22,7 +22,7 @@ public class ApplicationDAO {
 	private static ApplicationDAO applicationInstance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/job_app_db";
-	private SimpleDateFormat format = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
+	private SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 	
 	private CandidateDAO candidateDAO = CandidateDAO.getCandidateInstance();
 	

@@ -23,6 +23,8 @@
 	<h:outputStylesheet library="css" name="sign-in.css"  />
 	<h:outputStylesheet library="css" name="table.css"  />
 	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
 </h:head>
 
 <h:body>
@@ -56,7 +58,7 @@
 		
 		<br></br>
 	
-	<h:form class="form-control form-horizontal">
+	<h:form class="form-control form-horizontal" accept-charset="utf-8">
 	
 	<div class="form-group">
 	<h:outputLabel>Title: </h:outputLabel> 
@@ -70,7 +72,7 @@
 	<div class="form-group">
 	<h:outputLabel>Description: </h:outputLabel>
 	<br></br> 
-	<h:inputTextarea value="#{advert.description}" id="description" required="true"/> 	
+	<h:inputTextarea cols="60" rows="10" value="#{advert.description}" id="description" required="true"/> 	
     <h:message for="description" />
     </div>
     
@@ -79,7 +81,7 @@
     <div class="form-group">
     <h:outputLabel>Required Skills: </h:outputLabel> 
     <br></br>
-    <h:inputTextarea value="#{advert.req_skills}" id="req_skills" required="true"/> 
+    <h:inputTextarea cols="60" rows="10" value="#{advert.req_skills}" id="req_skills" required="true"/> 
 	<h:message for="req_skills" />
 	</div>
 	
@@ -90,6 +92,15 @@
 	<br></br>
 	<h:inputText styleClass="form-control datepicker" value="#{advert.close_time}" id="close_time" required="true"/>
 	<h:message for="close_time" />
+	</div>
+	
+	<br></br>
+	
+	<div class="form-group">
+	<h:outputLabel>Activate/Deactivate at: </h:outputLabel> 
+	<br></br>
+	<h:inputText styleClass="form-control datepicker" value="#{advert.act_deactTime}" id="act_deactTime" required="true"/>
+	<h:message for="act_deactTime" />
 	</div>
 	
 	<br></br>

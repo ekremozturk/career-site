@@ -17,6 +17,7 @@
 	<h:outputStylesheet library="css" name="sign-in.css"  />
 	<h:outputStylesheet library="css" name="table.css"  />
 	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	
 </h:head>
 
@@ -49,26 +50,42 @@
 		<br></br>
 		
 		
-	<div class="row lead" style="margin-left:8px">
-	Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
+	<div class="row lead col-md-12">
+	<strong>Code: </strong>
+	<h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
 	<br></br>
-	Title: <h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
 	<br></br>
-	Description: <h:outputText value="#{advertController.theAdvert.description}"></h:outputText>
+	<strong>Title: </strong> 
+	<h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
 	<br></br>
-	Required Skills: <h:outputText value="#{advertController.theAdvert.req_skills}"></h:outputText>
 	<br></br>
-	Opened At: <h:outputText value="#{advertController.theAdvert.open_time}"></h:outputText>
+	<strong>Company: </strong> 
+	<h:outputText value="#{hrSpecController.getHrSpec(advertController.theAdvert.hr_id).company}"></h:outputText>
 	<br></br>
-	Open Until: <h:outputText value="#{advertController.theAdvert.close_time}"></h:outputText>
 	<br></br>
-	Company: <h:outputText value="#{advertController.theAdvert.hr_id}"></h:outputText>
+	<strong>Description </strong> 
+	<br></br>
+	<h:outputText value="#{advertController.theAdvert.description}"></h:outputText>
+	<br></br>
+	<br></br>
+	<strong>Required Skills </strong>
+	<br></br>
+	<h:outputText value="#{advertController.theAdvert.req_skills}"></h:outputText>
+	<br></br>
+	<br></br>
+	<strong>Opened At: </strong>
+	<h:outputText value="#{advertController.theAdvert.open_time}"></h:outputText>
+	<br></br>
+	<br></br>
+	<strong>Open Until: </strong>
+	<h:outputText value="#{advertController.theAdvert.close_time}"></h:outputText>
 	<br></br>
 	</div>
-	<h:outputLabel>Cover Letter:</h:outputLabel>
+	<div class="row col-md-8" style="margin-bottom:16px">
+	<h:outputLabel><strong>Cover Letter: </strong></h:outputLabel>
 	
-	<h:form>
-	<h:inputTextarea value="#{app.cover_letter}" id="cover_letter" /> 
+	<h:form accept-charset="utf-8">
+	<h:inputTextarea cols="60" rows="10" value="#{app.cover_letter}" id="cover_letter" /> 
 	<h:message for="cover letter" />
 	
 	<br></br>
@@ -78,7 +95,7 @@
 					 style="color: white; margin-right:16px;" value="Apply" 
 	action="#{applicationController.addApplication(advertController.theAdvert.hr_id, advertController.theAdvert.id, candidateController.getCandidate(access.id).id, app.cover_letter)}"/>
 	</h:form>
-	
+	</div>
 	</div>
 
 </h:body>

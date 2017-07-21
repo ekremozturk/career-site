@@ -18,6 +18,8 @@
 	<h:outputStylesheet library="css" name="sign-in.css"  />
 	<h:outputStylesheet library="css" name="table.css"  />
 	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
 </h:head>
 
 <h:body>
@@ -72,6 +74,11 @@
 				</h:column>
 				
 				<h:column>
+					<f:facet name="header">Status</f:facet>
+					#{theAd.active}
+				</h:column>
+				
+				<h:column>
 					<f:facet name="header"></f:facet>
 					<h:outputLink value ="advert_detail.xhtml">
 					<f:param name="pid" value="#{theAd.id}" />More Info</h:outputLink>
@@ -79,8 +86,8 @@
 				
 				<h:column>
 					<f:facet name="header"></f:facet>
-					<h:outputLink value ="edit_advert.xhtml">
-					<f:param name="pid" value="#{theAd.id}" />Edit</h:outputLink>
+					<h:commandLink value ="Edit" action="#{advertController.loadAdvert(theAd.id)}"/>
+					
 				</h:column>
 				
 				<h:column>	

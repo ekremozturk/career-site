@@ -20,6 +20,8 @@
 	<h:outputStylesheet library="css" name="sign-in.css"  />
 	<h:outputStylesheet library="css" name="table.css"  />
 	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
 </h:head>
 
 <h:body>
@@ -56,19 +58,26 @@
 			<h4>#{candidateController.theCandidate.numConnections} connections</h4>
 		</div>
 		<div class="col-md-10">
-			Name: <h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
+			<strong>Name: </strong>
+			<h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
 			<br></br>
-			Surname: <h:outputText value="#{candidateController.theCandidate.surname}"></h:outputText>
+			<strong>Surname: </strong>
+			<h:outputText value="#{candidateController.theCandidate.surname}"></h:outputText>
 			<br></br>
-			Headline: <h:outputText value="#{candidateController.theCandidate.headline}"></h:outputText>
+			<strong>Headline: </strong>
+			<h:outputText value="#{candidateController.theCandidate.headline}"></h:outputText>
 			<br></br>
-			Skills: <h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
+			<strong>Skills: </strong>
+			<h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
 			<br></br>
-			Status: <h:outputText value="#{candidateController.theCandidate.isBlacklisted()}"></h:outputText>
+			<strong>Status: </strong>
+			<h:outputText value="#{candidateController.theCandidate.isBlacklisted()}"></h:outputText>
 			<br></br>
-			Email: <h:outputText value="#{candidateController.theCandidate.email}"></h:outputText>
+			<strong>Email: </strong>
+			<h:outputText value="#{candidateController.theCandidate.email}"></h:outputText>
 			<br></br>
-			Summary: <h:outputText value="#{candidateController.theCandidate.summary}"></h:outputText>
+			<strong>Summary: </strong>
+			<h:outputText value="#{candidateController.theCandidate.summary}"></h:outputText>
 		<br></br>
 		</div>
 	</div>

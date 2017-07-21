@@ -16,6 +16,8 @@
 	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
 	<h:outputStylesheet library="css" name="sign-in.css"  />
 	<h:outputStylesheet library="css" name="table.css"  />
+
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	
 	
 </h:head>
@@ -51,26 +53,48 @@
 	<div class="row lead" style="margin-left:8px">
 		<div class="col-md-2">
 			<img src="#{candidateController.theCandidate.pictureUrl}" />
-			<h4>#{candidateController.theCandidate.numConnections} connections</h4>
 		</div>
-		<div class="col-md-10">
-			Name: <h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
+		<div class="col-md-5">
+		
+			<strong>Name: </strong>
+			<h:outputText value="#{candidateController.theCandidate.name}"></h:outputText>
 			<br></br>
-			Surname: <h:outputText value="#{candidateController.theCandidate.surname}"></h:outputText>
 			<br></br>
-			Headline: <h:outputText value="#{candidateController.theCandidate.headline}"></h:outputText>
+			<strong>Surname: </strong>
+			<h:outputText value="#{candidateController.theCandidate.surname}"></h:outputText>
 			<br></br>
-			Skills: <h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
 			<br></br>
-			Email: <h:outputText value="#{candidateController.theCandidate.email}"></h:outputText>
+			<strong>Headline: </strong>
+			<h:outputText value="#{candidateController.theCandidate.headline}"></h:outputText>
 			<br></br>
-			Summary: <h:outputText value="#{candidateController.theCandidate.summary}"></h:outputText>
 			<br></br>
+			<strong>Skills </strong>
+			<br></br>
+			<h:outputText value="#{candidateController.theCandidate.skills}"></h:outputText>
+			<br></br>
+			<br></br>
+			<strong>Email: </strong>
+			<h:outputText value="#{candidateController.theCandidate.email}"></h:outputText>
+			<br></br>
+			<br></br>
+			<strong>Summary: </strong>
+			<h:outputText value="#{candidateController.theCandidate.summary}"></h:outputText>
+			<br></br>
+			<br></br>
+			
+			<h4>Add skills</h4>
+			<h:form>
+			<h:inputTextarea cols="30" rows="6" value="#{candidateController.theCandidate.skills}" id="skills" required="true"/> 	
+    			<h:message for="skills" />
+    			<br></br>
+			<h:commandButton class="btn btn-primary" style="color: white" value="Save" action="#{candidateController.setCandidateSkills(candidateController.theCandidate.skills)}"/>
+			</h:form>
+			
+			
 		</div>
 	</div>	
 		
 	</div>
-	
 </h:body>
 
 </html>

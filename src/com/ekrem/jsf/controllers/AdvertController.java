@@ -1,10 +1,15 @@
 package com.ekrem.jsf.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.ekrem.jsf.db.AdvertDAO;
 import com.ekrem.jsf.db.ApplicationDAO;
@@ -25,6 +30,8 @@ public class AdvertController {
 	private Advert theAdvert;
 	
 	private Date date = new Date();
+	
+	private SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");;
 	
 	private long hr_id;
 	
@@ -52,6 +59,33 @@ public class AdvertController {
 			
 			adverts = advertDAO.getAdverts();
 			
+			/**
+			for(Advert a:adverts) {
+				if(timeTrigger(a)) {
+					if(a.getActive()){
+						a.setActive(false);
+						updateAdvert(a);
+					} 
+					
+					else {
+						a.setActive(true);
+						updateAdvert(a);
+					}
+				}
+					
+			}
+				*/
+			
+			for(Advert a:adverts) {
+				if(isTimePassed(a)) {
+					a.setActive(false);
+					updateStatus(a);
+				} 
+					
+			}
+				
+			
+			
 			for(Advert a:adverts) 
 				if(a.getActive()) 
 					activeAdverts.add(a);
@@ -62,6 +96,15 @@ public class AdvertController {
 			
 		} catch (Exception exc) {
 			
+		}
+	}
+	
+	public void updateStatus(Advert advert) {
+		try {
+			advertDAO.updateStatus(advert);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -76,6 +119,22 @@ public class AdvertController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String loadAdvert(long id) {
+		Advert advert;
+		try {
+			advert = advertDAO.getAdvert(id);
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			Map<String, Object> requestMap = externalContext.getRequestMap();
+			requestMap.put("advert", advert);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "edit_advert";
+		
 	}
 	
 	public List<Advert> getAdverts() {
@@ -121,10 +180,15 @@ public class AdvertController {
 	}
 	
 	public String updateAdvert(Advert advert) {
-		advert.setId(theAdvert.getId());
-		advert.setHr_id(theAdvert.getHr_id());
-		advert.setCode(theAdvert.getCode());
-		advert.setOpen_time(theAdvert.getOpen_time());
+		if(advert.getId()==0 && theAdvert.getId() != 0) {
+			advert.setId(theAdvert.getId());
+			advert.setHr_id(theAdvert.getHr_id());
+			advert.setCode(theAdvert.getCode());
+			advert.setOpen_time(theAdvert.getOpen_time());
+		}
+		
+		//System.out.println(advert.getId());
+		
 		try {
 			advertDAO.updateAdvert(advert);
 		} catch (Exception e) {
@@ -139,6 +203,7 @@ public class AdvertController {
 		
 		try {
 			ApplicationController applicationController = new ApplicationController();
+			applicationController.loadApplications();
 			for(Application a :applicationController.getApplications())
 				if (a.getAdvert_id() == id)
 					applicationDAO.deleteApplication(a.getId());
@@ -182,4 +247,62 @@ public class AdvertController {
 	public void setCompanyAdverts(List<Advert> companyAdverts) {
 		this.companyAdverts = companyAdverts;
 	}
+	
+	public boolean isTimePassed(Advert a) {
+		String currentDate = format.format(this.date);
+		
+		if(getYear(currentDate)>getYear(a.getClose_time())) {
+			return true;
+		} else {
+			if(getMonth(currentDate)>getMonth(a.getClose_time())) {
+				return true;
+			} else {
+				if(getDay(currentDate)>=getDay(a.getClose_time())) {
+					return true;
+				}
+			}
+		}
+			
+		
+		return false;
+	}
+	
+	public boolean timeTrigger(Advert a) {
+		String currentDate = format.format(this.date);
+		
+		if(getYear(currentDate)>getYear(a.getAct_deactTime())) {
+			return true;
+		} else {
+			if(getMonth(currentDate)>getMonth(a.getAct_deactTime())) {
+				return true;
+			} else {
+				if(getDay(currentDate)>=getDay(a.getAct_deactTime())) {
+					return true;
+				}
+			}
+		}
+			
+		
+		return false;
+	}
+	
+	public int getYear(String date) {
+		String year = date.substring(0, 4);
+		return Integer.parseInt(year);
+	}
+	
+	public int getMonth(String date) {
+		String month = date.substring(5, 7);
+		return Integer.parseInt(month);
+	}
+	
+	public int getDay(String date) {
+		String day = date.substring(8, 10);
+		return Integer.parseInt(day);
+	}
+	
+	public void loadTheAdd(Advert advert) {
+		theAdvert = advert;
+	}
+	
 }

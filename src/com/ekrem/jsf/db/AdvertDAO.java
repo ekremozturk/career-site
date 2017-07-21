@@ -9,13 +9,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
 import javax.sql.DataSource;
 
 import com.ekrem.jsf.models.Advert;
@@ -29,7 +28,7 @@ public class AdvertDAO {
 	private static AdvertDAO advertInstance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/job_app_db";
-	private SimpleDateFormat format = new SimpleDateFormat ("yyyy.MM.dd");
+	private SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 	
 	
 	public static AdvertDAO getAdvertInstance() throws Exception {
@@ -89,8 +88,9 @@ public class AdvertDAO {
 				int active_i = rs.getInt("active");
 				boolean active=false;
 				if(active_i == 1) active = true;
+				String act_deactTime = rs.getString("act_deact_time");
 				Advert ad = new Advert(id, code, head,
-						description, skills, open_time, close_time, hr_id, active);
+						description, skills, open_time, close_time, hr_id, active, act_deactTime);
 
 		
 				ads.add(ad);
@@ -112,7 +112,7 @@ public class AdvertDAO {
 		try {
 			con = dataSource.getConnection();
 
-			String sql = "insert into job_advert (code, head, description, skills, open_time, close_time, hr_id, active) values (?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into job_advert (code, head, description, skills, open_time, close_time, hr_id, active, act_deact_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			stmt = con.prepareStatement(sql);
 
@@ -126,6 +126,7 @@ public class AdvertDAO {
 			boolean active=advert.getActive();
 			if(active) stmt.setInt(8, 1);
 			else stmt.setInt(8, 0);
+			stmt.setString(9, advert.getAct_deactTime());
 			
 			stmt.execute();			
 		}
@@ -169,8 +170,10 @@ public class AdvertDAO {
 				boolean active=false;
 				if(active_i == 1) active = true;
 				
+				String act_deactTime = rs.getString("act_deact_time");
+				
 				advert = new Advert(theId, code, head,
-						description, skills, open_time, close_time, hr_id, active);
+						description, skills, open_time, close_time, hr_id, active, act_deactTime);
 
 			}
 			else {
@@ -196,7 +199,7 @@ public class AdvertDAO {
 			con = dataSource.getConnection();
 
 			String sql = "update job_advert "
-						+ " set head=?, description=?, skills=?, close_time=?, active=?"
+						+ " set head=?, description=?, skills=?, close_time=?, active=?, act_deact_time=?"
 						+ " where id=?";
 
 			stmt = con.prepareStatement(sql);
@@ -206,11 +209,44 @@ public class AdvertDAO {
 			stmt.setString(2, advert.getDescription());
 			stmt.setString(3, advert.getReq_skills());
 			stmt.setString(4, advert.getClose_time());
+		
 			boolean active=advert.getActive();
 			if(active) stmt.setInt(5, 1);
 			else stmt.setInt(5, 0);
-			stmt.setLong(6, advert.getId());
 			
+			stmt.setLong(7, advert.getId());
+			stmt.setString(6, advert.getAct_deactTime());
+			//System.out.println(advert.getCode());
+			System.out.println(stmt);
+			stmt.execute();
+		}
+		finally {
+			con.close();
+			stmt.close();
+		}
+		
+	}
+	
+	public void updateStatus(Advert advert) throws Exception {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			con = dataSource.getConnection();
+
+			String sql = "update job_advert "
+						+ " set active=?"
+						+ " where id=?";
+
+			stmt = con.prepareStatement(sql);
+
+			boolean active=advert.getActive();
+			if(active) stmt.setInt(1, 1);
+			else stmt.setInt(1, 0);
+			stmt.setLong(2, advert.getId());
+			
+			//System.out.println(advert.getCode());
+			//System.out.println(stmt);
 			stmt.execute();
 		}
 		finally {

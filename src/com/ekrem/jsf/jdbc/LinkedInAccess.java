@@ -57,7 +57,7 @@ public class LinkedInAccess {
         System.out.println(response.getBody());
         
         Candidate candidate = new Candidate();
-
+        
         candidate.setEmail(properties.get(0));
         candidate.setName(properties.get(1));
         candidate.setHeadline(properties.get(2));

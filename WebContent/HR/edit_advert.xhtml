@@ -6,27 +6,35 @@
 
 <f:metadata>
   <f:event type="preRenderView" listener="#{advertController.getId(hraccess.id)}"/>
-  <f:event type="preRenderView" listener="#{advertController.loadTheAdvert(param['pid'])}"/>
+  <f:event type="preRenderView" listener="#{advertController.loadTheAdd(advert)}"/>
 </f:metadata>
 
 <h:head>
-
+	
 	<title>Edit Advert</title>
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" />
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	
+	<h:outputScript library="js" name="formatDatePicker.js" />
 	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
 	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
 	<h:outputStylesheet library="css" name="sign-in.css"  />
 	<h:outputStylesheet library="css" name="table.css"  />
 	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
 </h:head>
 
 <h:body>
 	<div class="container">
 	
-	<div class="row">
+		<div class="row">
 	
 			<div class="col-md-12">
-				<h3>Edit #{advertController.theAdvert.head}</h3>
+				<h3>Edit #{advert.head}</h3>
 			</div>
 		</div>
 	
@@ -49,61 +57,70 @@
 		
 		<br></br>
 
-	Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
+		Code: <h:outputText value="#{advert.code}"></h:outputText>
 	
-	<br></br>
+		<br></br>
 	
-	<h:form class="form-control form-horizontal">
+		<h:form class="form-control form-horizontal" accept-charset="utf-8">
 	
-	<div class="form-group">
-	<h:outputLabel>Title:</h:outputLabel> 
-	<br></br>
-	<h:inputText value="#{advert.head}" id="head" 
-	required="true"/> 
-	<h:message for="head" />
-	</div>
+		<div class="form-group">
+		<h:outputLabel>Title:</h:outputLabel> 
+		<br></br>
+		<h:inputText value="#{advert.head}" id="head" 
+		required="true"/> 
+		<h:message for="head" />
+		</div>
 	
-	<br></br>
+		<br></br>
 	
-	<div class="form-group">
-	<h:outputLabel>Description:</h:outputLabel> 
-	<br></br>
-	<h:inputText value="#{advert.description}" id="description" 
-	required="true"/> 	
-    <h:message for="description" />
-    </div>
+		<div class="form-group">
+		<h:outputLabel>Description:</h:outputLabel> 
+		<br></br>
+		<h:inputTextarea cols="60" rows="10" value="#{advert.description}" id="description" 
+		required="true"/> 	
+    		<h:message for="description" />
+    		</div>
     
-    <br></br>
+    		<br></br>
     
-    <div class="form-group">
-    <h:outputLabel>Required Skills:</h:outputLabel> 
-    <br></br>
-    <h:inputText value="#{advert.req_skills}" id="req_skills" 
-    required="true"/> 
-	<h:message for="req_skills" />
-	</div>
+    		<div class="form-group">
+    		<h:outputLabel>Required Skills:</h:outputLabel> 
+    		<br></br>
+    		<h:inputTextarea cols="60" rows="10" value="#{advert.req_skills}" id="req_skills" 
+    		required="true"/> 
+			<h:message for="req_skills" />
+		</div>
 	
-	<br></br>
+		<br></br>
 	
-	<div class="form-group">
-	<h:outputLabel>Open Until:</h:outputLabel> 
-	<br></br>
-	<h:inputText value="#{advert.close_time}" id="close_time" 
-    required="true"/> 
-	<h:message for="close_time" />
-	</div>
+		<div class="form-group">
+		<h:outputLabel>Open Until:</h:outputLabel> 
+		<br></br>
+		<h:inputText styleClass="form-control datepicker" value="#{advert.close_time}" id="close_time" 
+    		required="true"/> 
+		<h:message for="close_time" />
+		</div>
 	
-	<br></br>
+		<br></br>
+		
+		<div class="form-group">
+		<h:outputLabel>Activate/Deactivate at: </h:outputLabel> 
+		<br></br>
+		<h:inputText styleClass="form-control datepicker" value="#{advert.act_deactTime}" id="act_deactTime" required="true"/>
+		<h:message for="act_deactTime" />
+		</div>
 	
-	<div class="form-group">
-	<h:selectBooleanCheckbox value = "#{advert.active}">Active?:</h:selectBooleanCheckbox>
-	</div>
+		<br></br>
 	
-	<br></br>
+		<div class="form-group">
+		<h:selectBooleanCheckbox value = "#{advert.active}">Active?:</h:selectBooleanCheckbox>
+		</div>
 	
-	<div class="form-group">
-	<h:commandButton class="btn btn-primary" style="color: white" value="Post changes" action="#{advertController.updateAdvert(advert)}"/>
-	</div>
+		<br></br>
+
+		<div class="form-group">
+		<h:commandButton class="btn btn-primary" style="color: white" value="Post changes" action="#{advertController.updateAdvert(advert)}"/>
+		</div>
 	
 	</h:form>
 	

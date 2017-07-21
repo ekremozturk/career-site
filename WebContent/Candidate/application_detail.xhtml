@@ -18,6 +18,8 @@
 	<h:outputStylesheet library="css" name="sign-in.css"  />
 	<h:outputStylesheet library="css" name="table.css"  />
 	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
 </h:head>
 
 <h:body>
@@ -48,18 +50,24 @@
 		
 		<br></br>
 	
-		<div class="row lead" style="margin-left:8px">
-			Company: <h:outputText value="#{hrSpecController.getHrSpec(applicationController.theApplication.hr_id).company}"></h:outputText>
+		<div class="row lead col-md-8">
+			<strong>Company:</strong>
+			<h:outputText value="#{hrSpecController.getHrSpec(applicationController.theApplication.hr_id).company}"></h:outputText>
 			<br></br>
-			Candidate Name: <h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).name}"></h:outputText>
+			<strong>Candidate Name: </strong>
+			<h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).name}"></h:outputText>
 			<br></br>
-			Candidate Surname: <h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).surname}"></h:outputText>
+			<strong>Candidate Surname: </strong> 
+			<h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).surname}"></h:outputText>
 			<br></br>
-			Advert: <h:outputText value="#{advertController.getAdvert(applicationController.theApplication.advert_id).head}"></h:outputText>
+			<strong>Advert: </strong>
+			<h:outputText value="#{advertController.getAdvert(applicationController.theApplication.advert_id).head}"></h:outputText>
 			<br></br>
-			Applied at: <h:outputText value="#{applicationController.theApplication.apply_date}"></h:outputText>
+			<strong>Applied at: </strong>
+			<h:outputText value="#{applicationController.theApplication.apply_date}"></h:outputText>
 			<br></br>
-			Status: <h:outputText value="#{applicationController.theApplication.status}"></h:outputText>
+			<strong>Status: </strong>
+			<h:outputText value="#{applicationController.theApplication.status}"></h:outputText>
 			<br></br>
 		</div>
 	</div>

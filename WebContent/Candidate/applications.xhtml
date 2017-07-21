@@ -18,6 +18,8 @@
 	<h:outputStylesheet library="css" name="sign-in.css"  />
 	<h:outputStylesheet library="css" name="table.css"  />
 	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
 </h:head>
 
 <h:body>
@@ -88,6 +90,13 @@
 					<f:param name="pid" value="#{theApp.id}" />More Info</h:outputLink>
 					
 					
+				</h:column>
+				
+				<h:column>
+					<!-- the column header -->
+					<f:facet name="header"></f:facet>
+					
+					<h:commandLink value="Withdraw" action="#{applicationController.deleteApplication(theApp.id)}"/>
 				</h:column>
 				
 			</h:dataTable>

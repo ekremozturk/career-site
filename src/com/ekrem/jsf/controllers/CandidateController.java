@@ -61,7 +61,7 @@ public class CandidateController {
 
 	public String addCandidate(Candidate candidate) {
 		
-		candidate.setSkills("java, c++");
+		candidate.setSkills("");
 		
 		try {
 			candidateDAO.addCandidate(candidate);
@@ -83,7 +83,7 @@ public class CandidateController {
 			e.printStackTrace();
 		}
 		
-		return "home?faces-redirect=true";
+		return "profile?faces-redirect=true";
 	}
 	
 	public String deleteCandidate(long id) {
@@ -169,6 +169,15 @@ public class CandidateController {
 		
 		
 		return "applications?faces-redirect=true";
+	}
+	
+	public String setCandidateSkills(String skills) {
+		
+		theCandidate.setSkills(skills);
+		
+		updateCandidate(theCandidate);
+		
+		return "profile?faces-redirect=true";
 	}
 
 }

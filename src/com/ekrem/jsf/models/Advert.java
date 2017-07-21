@@ -3,7 +3,6 @@
  */
 package com.ekrem.jsf.models;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
@@ -26,6 +25,7 @@ public class Advert {
 	private String close_time;
 	private long hr_id;
 	private boolean active;
+	private String act_deactTime;
 	
 	public Advert() {
 		
@@ -42,7 +42,7 @@ public class Advert {
 
 
 	public Advert(long hr_id, String code, String head, String description, String req_skills, Date open_time,
-			String close_time, boolean active) {
+			String close_time, boolean active, String act_deactTime) {
 		super();
 		this.hr_id = hr_id;
 		this.code = code;
@@ -52,12 +52,13 @@ public class Advert {
 		this.open_time = open_time;
 		this.close_time = close_time;
 		this.active = active;
+		this.act_deactTime=act_deactTime;
 	}
 
 
 
 	public Advert(long id, String code, String head, String description, String req_skills, Date open_time,
-			String close_time, long hr_id, boolean active) {
+			String close_time, long hr_id, boolean active, String act_deactTime) {
 		super();
 		this.id = id;
 		this.code = code;
@@ -68,6 +69,7 @@ public class Advert {
 		this.close_time = close_time;
 		this.hr_id = hr_id;
 		this.active = active;
+		this.act_deactTime=act_deactTime;
 	}
 
 	public long getId() {
@@ -142,6 +144,14 @@ public class Advert {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getAct_deactTime() {
+		return act_deactTime;
+	}
+
+	public void setAct_deactTime(String act_deactTime) {
+		this.act_deactTime = act_deactTime;
 	}
 	
 	

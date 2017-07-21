@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.ekrem.jsf.db.ApplicationDAO;
+import com.ekrem.jsf.db.CandidateDAO;
 import com.ekrem.jsf.models.Application;
 import com.ekrem.jsf.models.Candidate;
 
@@ -20,6 +21,7 @@ import javax.mail.internet.*;
 public class ApplicationController {
 	
 	private ApplicationDAO applicationDAO;
+	private CandidateDAO candidateDAO;
 	private List<Application> applications;
 	private List<Application> companyApplications;
 	private List<Application> candidateApplications;
@@ -34,6 +36,7 @@ public class ApplicationController {
 		companyApplications = new ArrayList<>();
 		candidateApplications = new ArrayList<>();
 		applicationDAO = ApplicationDAO.getApplicationInstance();
+		candidateDAO = CandidateDAO.getCandidateInstance();
 	}
 	
 	public Application getTheApplication() {
@@ -110,7 +113,11 @@ public class ApplicationController {
 
 	public String addApplication(long hr_id, long advert_id, long candidate_id, String cover_letter) {
 		
-		Application application = new Application(hr_id, advert_id, candidate_id, date, cover_letter, "pending");
+		for(Application a:applications)
+			if(candidate_id == a.getCandidate_id() && advert_id == a.getAdvert_id())
+				return "home?faces-redirect=true";
+		
+		Application application = new Application(hr_id, advert_id, candidate_id, date, cover_letter, "Pending");
 		
 		try {
 			applicationDAO.addApplication(application);
@@ -157,10 +164,11 @@ public class ApplicationController {
 			e.printStackTrace();
 		}
 		
-		application.setStatus(status);
 		
-		if(getCandidate(application).getBlacklist()==0) {
-			sendEmail("ekremozturk22@gmail.com", "rejected");
+		
+		if(getCandidate(application).getBlacklist()==0 && !application.getStatus().equals(status)) {
+			application.setStatus(status);
+			//sendEmail("ekrem.ozturk@boun.edu.tr", "rejected");
 			updateApplication(application);
 		}
 		
@@ -235,7 +243,7 @@ public class ApplicationController {
 	      String from = "ekremozturk22@gmail.com";
 
 	      // Assuming you are sending email from localhost
-	      String host = "localhost";
+	      String host = "0.0.0.0";
 
 	      // Get system properties
 	      Properties properties = System.getProperties();
