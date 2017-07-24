@@ -13,6 +13,21 @@
 
 	<title>Applications</title>
 	
+	<script type="text/javascript">
+	
+		function getConfirmation(action, message){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					
+              		return true;
+           		}
+           		else{
+          	 		
+           	   		return false;
+          	 	}
+		}
+     </script> 
+	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
 	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
 	<h:outputStylesheet library="css" name="sign-in.css"  />
@@ -43,7 +58,7 @@
 				
 				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="My Profile" outcome="profile"/>
 				
-				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{access.logout()}"/>
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{access.logout()}"/>
 				</h:form>
 			</div>
 		</div>
@@ -58,34 +73,44 @@
 				rowClasses="demo-table-odd-row,demo-table-even-row">
 
 				<h:column>
-					<!-- the column header -->
-					<f:facet name="header">Advert</f:facet>
+				
+					<f:facet name="header">Advert Code</f:facet>
 
-					<!--  the value for each row -->
-					#{advertController.getAdvert(theApp.advert_id).head}
-				</h:column>
-
-				<h:column>
-					<!-- the column header -->
-					<f:facet name="header">Candidate Name</f:facet>
-
-					<!--  the value for each row -->
-					#{candidateController.getCandidate(theApp.candidate_id).name}
-				</h:column>
-
-				<h:column>
-					<!-- the column header -->
-					<f:facet name="header">Candidate Surname</f:facet>
-
-					<!--  the value for each row -->
-					#{candidateController.getCandidate(theApp.candidate_id).surname}
+					#{advertController.getAdvert(theApp.advert_id).code}
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
+			
+					<f:facet name="header">Company</f:facet>
+
+					#{hrSpecController.getHrSpec(theApp.hr_id).company}
+				</h:column>
+				
+				<h:column>
+
+					<f:facet name="header">Advert Title</f:facet>
+
+					#{advertController.getAdvert(theApp.advert_id).head}
+				</h:column>
+				
+				<h:column>
+
+					<f:facet name="header">Applied at</f:facet>
+
+					#{theApp.apply_date}
+				</h:column>
+				
+				<h:column>
+
+					<f:facet name="header">Status</f:facet>
+
+					#{theApp.status}
+				</h:column>	
+				
+				<h:column>
+
 					<f:facet name="header"></f:facet>
 
-					<!--  the value for each row -->
 					<h:outputLink value ="application_detail.xhtml">
 					<f:param name="pid" value="#{theApp.id}" />More Info</h:outputLink>
 					
@@ -93,7 +118,7 @@
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header"></f:facet>
 					
 					<h:commandLink value="Withdraw" action="#{applicationController.deleteApplication(theApp.id)}"/>

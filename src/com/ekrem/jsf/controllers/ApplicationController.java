@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.ekrem.jsf.db.ApplicationDAO;
 import com.ekrem.jsf.db.CandidateDAO;
@@ -113,9 +115,10 @@ public class ApplicationController {
 
 	public String addApplication(long hr_id, long advert_id, long candidate_id, String cover_letter) {
 		
-		for(Application a:applications)
-			if(candidate_id == a.getCandidate_id() && advert_id == a.getAdvert_id())
-				return "home?faces-redirect=true";
+		if(!checkDuplicate(candidate_id, advert_id))
+			return "home?faces-redirect=true";
+			
+				
 		
 		Application application = new Application(hr_id, advert_id, candidate_id, date, cover_letter, "Pending");
 		
@@ -168,7 +171,6 @@ public class ApplicationController {
 		
 		if(getCandidate(application).getBlacklist()==0 && !application.getStatus().equals(status)) {
 			application.setStatus(status);
-			//sendEmail("ekrem.ozturk@boun.edu.tr", "rejected");
 			updateApplication(application);
 		}
 		
@@ -235,48 +237,13 @@ public class ApplicationController {
 		this.statusFilter = statusFilter;
 	}
 	
-	public void sendEmail(String email, String status) {
-		// Recipient's email ID needs to be mentioned.
-	      String to = email;
-
-	      // Sender's email ID needs to be mentioned
-	      String from = "ekremozturk22@gmail.com";
-
-	      // Assuming you are sending email from localhost
-	      String host = "0.0.0.0";
-
-	      // Get system properties
-	      Properties properties = System.getProperties();
-
-	      // Setup mail server
-	      properties.setProperty("mail.smtp.host", host);
-
-	      // Get the default Session object.
-	      Session session = Session.getDefaultInstance(properties);
-
-	      try {
-	         // Create a default MimeMessage object.
-	         MimeMessage message = new MimeMessage(session);
-
-	         // Set From: header field of the header.
-	         message.setFrom(new InternetAddress(from));
-
-	         // Set To: header field of the header.
-	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-	         // Set Subject: header field
-	         message.setSubject("Status change on your application");
-
-	         // Now set the actual message
-	         message.setText(status);
-
-	         // Send message
-	         Transport.send(message);
-	         System.out.println("Sent message successfully....");
-	      }catch (MessagingException mex) {
-	         mex.printStackTrace();
-	      }
+	public boolean checkDuplicate(long candidate_id, long advert_id) {
+		for(Application a:applications) {
+			if(candidate_id == a.getCandidate_id() && advert_id == a.getAdvert_id()) {
+				return false;
+			}
+		}
+		return true;
 	}
-	
 
 }

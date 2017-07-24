@@ -13,6 +13,21 @@
 
 	<title>Application Info</title>
 	
+	<script type="text/javascript">
+	
+		function getConfirmation(action, message){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					
+              		return true;
+           		}
+           		else{
+          	 		
+           	   		return false;
+          	 	}
+		}
+     </script> 
+	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
 	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
 	<h:outputStylesheet library="css" name="sign-in.css"  />
@@ -43,7 +58,7 @@
 				
 				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="My Profile" outcome="profile"/>
 				
-				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{access.logout()}"/>
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{access.logout()}"/>
 				</h:form>
 			</div>
 		</div>
@@ -68,6 +83,10 @@
 			<br></br>
 			<strong>Status: </strong>
 			<h:outputText value="#{applicationController.theApplication.status}"></h:outputText>
+			<br></br>
+			<strong>Cover Letter </strong>
+			<br></br>
+			<h:outputText value="#{applicationController.theApplication.cover_letter}"></h:outputText>
 			<br></br>
 		</div>
 	</div>

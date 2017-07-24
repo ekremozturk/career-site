@@ -13,6 +13,21 @@
 
 	<title>Applications</title>
 	
+	<script type="text/javascript">
+	
+		function getConfirmation(action, message){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					
+              		return true;
+           		}
+           		else{
+          	 		
+           	   		return false;
+          	 	}
+		}
+     </script> 
+	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
 	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
 	<h:outputStylesheet library="css" name="sign-in.css"  />
@@ -43,7 +58,7 @@
 				
 				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Add Advert" outcome="add_advert"/>
 			
-				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{hraccess.logout()}"/>			
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{hraccess.logout()}"/>			
 				</h:form>	
 			</div>
 		</div>

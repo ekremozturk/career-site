@@ -6,11 +6,28 @@
 
 <f:metadata>
   <f:event type="preRenderView" listener="#{advertController.loadTheAdvert(param['pid'])}"/>
+  <f:event type="preRenderView" listener="#{applicationController.loadApplications()}"/>
 </f:metadata>
 
 <h:head>
 
 	<title>Advert Info</title>
+	
+	<script type="text/javascript">
+	
+		function getConfirmation(action, message){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					
+              		return true;
+           		}
+           		else{
+          	 		
+           	   		return false;
+          	 	}
+		}
+		
+     </script> 
 	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
 	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
@@ -42,7 +59,7 @@
 				
 				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="My Profile" outcome="profile"/>
 				
-				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{access.logout()}"/>
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{access.logout()}"/>
 				</h:form>
 			</div>
 		</div>
@@ -90,10 +107,10 @@
 	
 	<br></br>
 	<br></br>
-	
-	<h:commandButton class="btn btn-primary border-radius"
+	<h:commandButton class="btn btn-primary border-radius" id="apply"
 					 style="color: white; margin-right:16px;" value="Apply" 
-	action="#{applicationController.addApplication(advertController.theAdvert.hr_id, advertController.theAdvert.id, candidateController.getCandidate(access.id).id, app.cover_letter)}"/>
+	action="#{applicationController.addApplication(advertController.theAdvert.hr_id, advertController.theAdvert.id, candidateController.getCandidate(access.id).id, app.cover_letter)}"
+	rendered="#{applicationController.checkDuplicate(candidateController.getCandidate(access.id).id, advertController.theAdvert.id)}"/>
 	</h:form>
 	</div>
 	</div>

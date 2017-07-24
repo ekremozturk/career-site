@@ -12,6 +12,21 @@
 
 	<title>Home</title>
 	
+	<script type="text/javascript">
+	
+		function getConfirmation(action, message){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					
+              		return true;
+           		}
+           		else{
+          	 		
+           	   		return false;
+          	 	}
+		}
+     </script> 
+	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
 	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
 	<h:outputStylesheet library="css" name="sign-in.css"  />
@@ -41,7 +56,7 @@
 				
 				<h:button class="btn btn-primary border-radius" style="color: white; margin-right:16px;" value="My Profile" outcome="profile"/>
 				
-				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{access.logout()}"/>
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{access.logout()}"/>
 				</h:form>
 			</div>
 	</div>
@@ -56,34 +71,37 @@
 				rowClasses="demo-table-odd-row,demo-table-even-row">
 
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header">Code</f:facet>
 
-					<!--  the value for each row -->
 					#{theAd.code}
+				</h:column>
+				
+				<h:column>
+				
+					<f:facet name="header">Company</f:facet>
+
+					#{hrSpecController.getHrSpec(theAd.hr_id).company}
 				</h:column>
 
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header">Title</f:facet>
 
-					<!--  the value for each row -->
 					#{theAd.head}
 				</h:column>
 
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header">Open Until</f:facet>
 
-					<!--  the value for each row -->
 					#{theAd.close_time}
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header"></f:facet>
 
-					<!--  the value for each row -->
 					<h:outputLink value ="advert_detail.xhtml">
 					<f:param name="pid" value="#{theAd.id}" />More Info</h:outputLink>
 				</h:column>

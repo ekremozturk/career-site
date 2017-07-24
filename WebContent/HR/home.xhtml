@@ -20,6 +20,33 @@
 	
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	
+	<script type="text/javascript">
+         
+		function getConfirmation(action){
+			var retVal = confirm(action);
+				if( retVal == true ){
+                  	return true;
+               	}
+               	else{
+                  
+                  	return false;
+               	}
+		}
+		
+		function getConfirmationDelete(action){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					alert ("The advert has been deleted successfully");
+                  	return true;
+               	}
+               	else{
+               		alert ("Failed to delete the advert");
+                  	return false;
+               	}
+		}
+         
+      </script>
+	
 </h:head>
 
 <h:body>
@@ -44,7 +71,7 @@
 				
 					<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Add Advert" outcome="add_advert"/>
 			
-					<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{hraccess.logout()}"/>			
+					<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false"  action="#{hraccess.logout()}"/>			
 				</h:form>
 					
 			</div>
@@ -92,7 +119,7 @@
 				
 				<h:column>	
 					<f:facet name="header"></f:facet>
-					<h:commandLink value="Delete" action="#{advertController.deleteAdvert(theAd.id)}"/>
+					<h:commandLink value="Delete" onclick="if(!getConfirmationDelete('Are you sure want to delete this advert?')) return false" action="#{advertController.deleteAdvert(theAd.id)}"/>
 					
 				</h:column>
 	</h:dataTable>

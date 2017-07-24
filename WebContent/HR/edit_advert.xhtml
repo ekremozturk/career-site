@@ -13,6 +13,34 @@
 	
 	<title>Edit Advert</title>
 	
+	<script type="text/javascript">
+	
+		function getConfirmation(action, message){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					
+              		return true;
+           		}
+           		else{
+          	 		
+           	   		return false;
+          	 	}
+		}
+      
+		function getConfirmationEdit(action, message){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					alert ("The advert has been edited successfully");
+                  	return true;
+               	}
+               	else{
+               		
+                  	return false;
+               	}
+		}
+		
+	</script>
+	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" />
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -50,7 +78,7 @@
 				
 					<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Add Advert" outcome="add_advert"/>
 			
-					<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{hraccess.logout()}"/>			
+					<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{hraccess.logout()}"/>			
 				</h:form>
 			</div>
 		</div>
@@ -60,7 +88,7 @@
 		Code: <h:outputText value="#{advert.code}"></h:outputText>
 	
 		<br></br>
-	
+		
 		<h:form class="form-control form-horizontal" accept-charset="utf-8">
 	
 		<div class="form-group">
@@ -119,7 +147,7 @@
 		<br></br>
 
 		<div class="form-group">
-		<h:commandButton class="btn btn-primary" style="color: white" value="Post changes" action="#{advertController.updateAdvert(advert)}"/>
+		<h:commandButton class="btn btn-primary" style="color: white" value="Post changes" onclick="if(!getConfirmation('Done editing?')) return false" action="#{advertController.updateAdvert(advert)}"/>
 		</div>
 	
 	</h:form>

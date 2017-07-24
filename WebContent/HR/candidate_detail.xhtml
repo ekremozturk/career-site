@@ -13,6 +13,21 @@
 
 <h:head>
 
+	<script type="text/javascript">
+	
+		function getConfirmation(action, message){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					
+              		return true;
+           		}
+           		else{
+          	 		
+           	   		return false;
+          	 	}
+		}
+     </script> 
+
 	<title>Candidate Info</title>
 	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
@@ -45,7 +60,7 @@
 				
 				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Add Advert" outcome="add_advert"/>
 			
-				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" action="#{hraccess.logout()}"/>			
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{hraccess.logout()}"/>			
 				</h:form>	
 			</div>
 		</div>
@@ -55,7 +70,6 @@
 	<div class="row lead" style="margin-left:8px">
 		<div class="col-md-2">
 			<img src="#{candidateController.theCandidate.pictureUrl}" />
-			<h4>#{candidateController.theCandidate.numConnections} connections</h4>
 		</div>
 		<div class="col-md-10">
 			<strong>Name: </strong>
