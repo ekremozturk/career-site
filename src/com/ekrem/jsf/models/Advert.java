@@ -154,6 +154,9 @@ public class Advert {
 		this.act_deactTime = act_deactTime;
 	}
 	
-	
+	public String Status() {
+		if(active) return "Active";
+		else return "Passive";
+	}
 
 }

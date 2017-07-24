@@ -23,6 +23,7 @@ public class SigninAccess {
 	}
 	
 	public String SignIn(String company, String password) throws Exception {
+		
 		HrSpecController hrSpecController = new HrSpecController();
 		
 		id = hrSpecController.getId(company, password);
@@ -30,7 +31,6 @@ public class SigninAccess {
 	}
 	
 	public String logout() {
-		System.out.println("aa");
 		id = -1;
 		return "/sign_in?faces-redirect=true";
 	}

@@ -127,7 +127,6 @@ public class CandidateController {
 		theCandidate=new Candidate();
 		
 		try {
-			System.out.println(id);
 			theCandidate = candidateDAO.getCandidate(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

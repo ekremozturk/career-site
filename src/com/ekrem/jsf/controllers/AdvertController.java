@@ -113,7 +113,6 @@ public class AdvertController {
 		theAdvert=new Advert();
 		
 		try {
-			System.out.println(id);
 			theAdvert = advertDAO.getAdvert(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -88,6 +88,10 @@
 		<strong>Status: </strong>
 		<h:outputText value="#{applicationController.theApplication.status}"></h:outputText>
 		<br></br>
+		<strong>Cover Letter </strong>
+		<br></br>
+		<h:outputText value="#{applicationController.theApplication.cover_letter}"></h:outputText>
+		<br></br>
 	</div>
 	
 	<p><h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Go to Candidate's Details" outcome="candidate_detail"><f:param name="pid" value="#{applicationController.theApplication.candidate_id}" /></h:button></p>

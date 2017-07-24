@@ -26,6 +26,7 @@
            	   		return false;
           	 	}
 		}
+		
      </script> 
 	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
@@ -86,74 +87,85 @@
 				styleClass="demo-table" 
 				headerClass="demo-table-header"
 				rowClasses="demo-table-odd-row,demo-table-even-row">
+				
+				<h:column>
+				
+					<f:facet name="header">Advert Code</f:facet>
+
+					#{advertController.getAdvert(theApp.advert_id).code}
+				</h:column>
 
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header">Advert</f:facet>
 
-					<!--  the value for each row -->
 					#{advertController.getAdvert(theApp.advert_id).head}
 				</h:column>
 
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header">Candidate Name</f:facet>
 
-					<!--  the value for each row -->
 					#{candidateController.getCandidate(theApp.candidate_id).name}
 				</h:column>
 
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header">Candidate Surname</f:facet>
 
-					<!--  the value for each row -->
 					#{candidateController.getCandidate(theApp.candidate_id).surname}
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header">Status</f:facet>
 
-					<!--  the value for each row -->
 					#{theApp.status}
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
+
+					<f:facet name="header">Applied at</f:facet>
+
+					#{theApp.apply_date}
+				</h:column>
+				
+				<h:column>
+
 					<f:facet name="header"></f:facet>
 
-					<!--  the value for each row -->
 					<h:outputLink value ="application_detail.xhtml">
 					<f:param name="pid" value="#{theApp.id}" />More Info</h:outputLink>
-					
+
+				</h:column>
+				
+				<h:column>
+
+					<f:facet name="header"></f:facet>
+
+					<h:commandLink value="Put in Process"
+					onclick="if(!getConfirmation('Are you sure want to put application into process?')) return false"
+					action="#{applicationController.changeStatus(theApp.id, 'In Evaluation')}"/>
 					
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header"></f:facet>
 
-					<!--  the value for each row -->
-					<h:commandLink value="Put in Process" action="#{applicationController.changeStatus(theApp.id, 'In Evaluation')}"/>
+					<h:commandLink value="Accept" 
+					onclick="if(!getConfirmation('Are you sure want to accept the application?')) return false"
+					action="#{applicationController.changeStatus(theApp.id, 'Accepted')}"/>
 					
 				</h:column>
 				
 				<h:column>
-					<!-- the column header -->
+
 					<f:facet name="header"></f:facet>
 
-					<!--  the value for each row -->
-					<h:commandLink value="Accept" action="#{applicationController.changeStatus(theApp.id, 'Accepted')}"/>
-					
-				</h:column>
-				
-				<h:column>
-					<!-- the column header -->
-					<f:facet name="header"></f:facet>
-
-					<!--  the value for each row -->
-					<h:commandLink value="Reject" action="#{applicationController.changeStatus(theApp.id, 'Rejected')}"/>
+					<h:commandLink value="Reject" 
+					onclick="if(!getConfirmation('Are you sure want to reject the application?')) return false"
+					action="#{applicationController.changeStatus(theApp.id, 'Rejected')}"/>
 					
 				</h:column>
 				
