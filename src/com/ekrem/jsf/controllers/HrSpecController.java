@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.ekrem.jsf.db.HrSpecDAO;
+import com.ekrem.jsf.jdbc.LDAPcon;
 import com.ekrem.jsf.models.HrSpec;
 
 /**
@@ -91,7 +92,12 @@ public class HrSpecController {
 	public long getId(String company, String password) {
 		long id = -1;
 		try {
-			id = hrSpecDAO.checkPassword(company, password);
+			
+			LDAPcon con = new LDAPcon();
+			
+			if(con.Authenticate(company, password))
+				id = hrSpecDAO.checkPassword(company, password);
+				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

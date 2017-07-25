@@ -70,6 +70,11 @@
   			<version>6.6.0</version>
 		</dependency>
 
+		<dependency>
+    			<groupId>org.apache.directory.api</groupId>
+    			<artifactId>api-all</artifactId>
+    			<version>1.0.0</version>
+		</dependency>
 		
     </dependencies>
 </project>
