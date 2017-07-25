@@ -11,8 +11,6 @@ import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 
-@ManagedBean (name = "ldapcon")
-@SessionScoped
 public class LDAPcon {
 	
 	private String url = "ldap://localhost:10389";

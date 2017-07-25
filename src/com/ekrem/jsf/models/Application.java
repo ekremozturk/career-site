@@ -14,6 +14,7 @@ public class Application {
 	private Date apply_date;
 	private String cover_letter;
 	private String status;
+	private String statusInfo;
 	
 	public Application() {
 		

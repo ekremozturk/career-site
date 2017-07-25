@@ -140,5 +140,10 @@ public class LinkedInAccess {
 		query = ""; code = ""; id = "no-login";
 		return "/sign_in?faces-redirect=true";
 	}
+	
+	public boolean checkAuth() {
+		if(!id.equals("no-login")) return true;
+		else return false;
+	}
 
 }

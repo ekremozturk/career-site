@@ -59,22 +59,22 @@ public class AdvertController {
 			
 			adverts = advertDAO.getAdverts();
 			
-			/**
+			
 			for(Advert a:adverts) {
 				if(timeTrigger(a)) {
 					if(a.getActive()){
 						a.setActive(false);
-						updateAdvert(a);
+						updateStatus(a);
 					} 
 					
 					else {
 						a.setActive(true);
-						updateAdvert(a);
+						updateStatus(a);
 					}
 				}
 					
 			}
-				*/
+				
 			
 			for(Advert a:adverts) {
 				if(isTimePassed(a)) {
@@ -250,18 +250,10 @@ public class AdvertController {
 	public boolean isTimePassed(Advert a) {
 		String currentDate = format.format(this.date);
 		
-		if(getYear(currentDate)>getYear(a.getClose_time())) {
-			return true;
-		} else {
-			if(getMonth(currentDate)>getMonth(a.getClose_time())) {
-				return true;
-			} else {
-				if(getDay(currentDate)>=getDay(a.getClose_time())) {
-					return true;
-				}
-			}
-		}
-			
+		if(getYear(currentDate)<=getYear(a.getClose_time())) 
+			if(getMonth(currentDate)<=getMonth(a.getClose_time())) 
+				if(getDay(currentDate)<getDay(a.getClose_time())) 
+					return true;	
 		
 		return false;
 	}
@@ -269,18 +261,10 @@ public class AdvertController {
 	public boolean timeTrigger(Advert a) {
 		String currentDate = format.format(this.date);
 		
-		if(getYear(currentDate)>getYear(a.getAct_deactTime())) {
-			return true;
-		} else {
-			if(getMonth(currentDate)>getMonth(a.getAct_deactTime())) {
-				return true;
-			} else {
-				if(getDay(currentDate)>=getDay(a.getAct_deactTime())) {
+		if(getYear(currentDate)<=getYear(a.getClose_time())) 
+			if(getMonth(currentDate)<=getMonth(a.getClose_time())) 
+				if(getDay(currentDate)<getDay(a.getClose_time())) 
 					return true;
-				}
-			}
-		}
-			
 		
 		return false;
 	}

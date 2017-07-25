@@ -27,7 +27,7 @@
 	<div class="row">
 	
 			<div class="col-md-12">
-				<h3>Advert #{advertController.theAdvert.head}</h3>
+				<h3>Advert: #{advertController.theAdvert.head}</h3>
 			</div>
 		</div>
 	
@@ -44,22 +44,43 @@
 		<br></br>
 
 	<div class="row lead" style="margin-left:0px">
-	Code: <h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
+	<strong>Code: </strong>
+	<h:outputText value="#{advertController.theAdvert.code}"></h:outputText>
 	<br></br>
-	Title: <h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
 	<br></br>
-	Description: <h:outputText value="#{advertController.theAdvert.description}"></h:outputText>
+	<strong>Company: </strong>
+	<h:outputText value="#{hrSpecController.getHrSpec(advertController.theAdvert.hr_id).company}"></h:outputText>
 	<br></br>
-	Required Skills: <h:outputText value="#{advertController.theAdvert.req_skills}"></h:outputText>
 	<br></br>
-	Opened At: <h:outputText value="#{advertController.theAdvert.open_time}"></h:outputText>
+	<strong>Title: </strong>
+	<h:outputText value="#{advertController.theAdvert.head}"></h:outputText>
 	<br></br>
-	Open Until: <h:outputText value="#{advertController.theAdvert.close_time}"></h:outputText>
 	<br></br>
-	Company: <h:outputText value="#{advertController.theAdvert.hr_id}"></h:outputText>
+	<strong>Description </strong>
 	<br></br>
+	<h:outputText value="#{advertController.theAdvert.description}"></h:outputText>
+	<br></br>
+	<br></br>
+	<strong>Required Skills </strong>
+	<br></br>
+	<h:outputText value="#{advertController.theAdvert.req_skills}"></h:outputText>
+	<br></br>
+	<br></br>
+	<strong>Opened At: </strong>
+	<h:outputText value="#{advertController.theAdvert.open_time}"></h:outputText>
+	<br></br>
+	<br></br>
+	<strong>Open Until: </strong>
+	<h:outputText value="#{advertController.theAdvert.close_time}"></h:outputText>
+	<br></br>
+	<br></br>
+	
 	</div>
-	<h3>Please, login to apply!</h3>
+	<h3>Please <h:outputLink value="#{auth.main()}"> <h:graphicImage library="images" name="sign-in-small.png" /> </h:outputLink> to apply!</h3>
+	</div>
+	
+	<div class="row">
+	<hr></hr>
 	</div>
 </h:body>
 
