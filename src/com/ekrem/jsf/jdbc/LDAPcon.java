@@ -2,8 +2,6 @@ package com.ekrem.jsf.jdbc;
 
 import java.util.Hashtable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.naming.AuthenticationException;
 import javax.naming.AuthenticationNotSupportedException;
 import javax.naming.Context;

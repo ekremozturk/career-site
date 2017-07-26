@@ -4,19 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import com.ekrem.jsf.db.ApplicationDAO;
 import com.ekrem.jsf.db.CandidateDAO;
 import com.ekrem.jsf.models.Application;
 import com.ekrem.jsf.models.Candidate;
-
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
 
 @ManagedBean (name = "applicationController")
 @SessionScoped
@@ -245,5 +239,5 @@ public class ApplicationController {
 		}
 		return true;
 	}
-
+	
 }
