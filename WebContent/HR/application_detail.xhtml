@@ -7,6 +7,7 @@
 <f:metadata>
 	<f:event type="preRenderView" listener="#{applicationController.getId(hraccess.id)}"/>
   	<f:event type="preRenderView" listener="#{applicationController.loadTheApplication(param['pid'])}"/>
+  	<f:event type="preRenderView" listener="#{hraccess.checkAuth()}"/>
 </f:metadata>
 
 <h:head>
@@ -34,6 +35,8 @@
 	<h:outputStylesheet library="css" name="table.css"  />
 	
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet"/>
 	
 </h:head>
 
@@ -80,7 +83,10 @@
 		<h:outputText value="#{candidateController.getCandidate(applicationController.theApplication.candidate_id).surname}"></h:outputText>
 		<br></br>
 		<strong>Advert: </strong>
-		<h:outputText value="#{advertController.getAdvert(applicationController.theApplication.advert_id).head}"></h:outputText>
+		<h:outputLink value="advert_detail.xhtml">
+		#{advertController.getAdvert(applicationController.theApplication.advert_id).head}
+		<f:param name="pid" value="#{applicationController.theApplication.advert_id}" />
+		</h:outputLink>
 		<br></br>
 		<strong>Applied at: </strong>
 		<h:outputText value="#{applicationController.theApplication.apply_date}"></h:outputText>

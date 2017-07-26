@@ -7,6 +7,7 @@
 <f:metadata>
   <f:event type="preRenderView" listener="#{advertController.loadTheAdvert(param['pid'])}"/>
   <f:event type="preRenderView" listener="#{applicationController.loadApplications()}"/>
+  <f:event type="preRenderView" listener="#{access.checkAuth()}"/>
 </f:metadata>
 
 <h:head>
@@ -36,10 +37,12 @@
 	
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet"/>
+	
 </h:head>
 
 <h:body> 
-
+	
 	<div class="container">
 
 	<div class="row">
@@ -99,10 +102,15 @@
 	<br></br>
 	</div>
 	<div class="row col-md-8" style="margin-bottom:16px">
-	<h:outputLabel><strong>Cover Letter: </strong></h:outputLabel>
+	
+	<h:outputLabel
+	rendered="#{applicationController.checkDuplicate(candidateController.getCandidate(access.id).id, advertController.theAdvert.id)}">
+	<strong>Cover Letter: </strong>
+	</h:outputLabel>
 	
 	<h:form accept-charset="utf-8">
-	<h:inputTextarea cols="60" rows="10" value="#{app.cover_letter}" id="cover_letter" /> 
+	<h:inputTextarea  cols="60" rows="10" value="#{app.cover_letter}" id="cover_letter" 
+	rendered="#{applicationController.checkDuplicate(candidateController.getCandidate(access.id).id, advertController.theAdvert.id)}"/> 
 	<h:message for="cover letter" />
 	
 	<br></br>

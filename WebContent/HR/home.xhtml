@@ -7,6 +7,7 @@
 <f:metadata>
   <f:event type="preRenderView" listener="#{advertController.getId(hraccess.id)}"/>
   <f:event type="preRenderView" listener="#{advertController.loadAdverts()}"/>
+  <f:event type="preRenderView" listener="#{hraccess.checkAuth()}"/>
 </f:metadata>
 
 <h:head>
@@ -19,6 +20,8 @@
 	<h:outputStylesheet library="css" name="table.css"  />
 	
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet"/>
 	
 	<script type="text/javascript">
          
@@ -78,6 +81,31 @@
 		</div>
 		
 		<br></br>
+		
+		<div class="row">
+		
+		
+		<h3 class="text-center">Job adverts posted by #{hrSpecController.getHrSpec(hraccess.id).company}</h3>
+		
+		
+		<div class="col-md-3">
+		
+		<h:form>
+		
+		Filter: 
+			<h:selectOneMenu value="#{advertController.advertFilter}">
+				<f:selectItem itemLabel="All" itemValue="All" />
+				<f:selectItem itemLabel="Active" itemValue="Active" />
+				<f:selectItem itemLabel="Passive" itemValue="Passive" />
+				
+			</h:selectOneMenu>
+			
+			<h:commandButton class="btn btn-primary" style="color: white; margin-left:16px;" value="Filter" action="#{advertController.filterResults()}" />
+		</h:form>
+		
+		</div>
+		
+		</div>
 	
 		<h:form>			
 		<h:dataTable value="#{advertController.companyAdverts}" var="theAd"

@@ -7,6 +7,7 @@
 <f:metadata>
 	<f:event type="preRenderView" listener="#{applicationController.getCId(candidateController.getCandidate(access.id).id)}"/>
   	<f:event type="preRenderView" listener="#{applicationController.loadApplications()}"/>
+  	<f:event type="preRenderView" listener="#{access.checkAuth()}"/>
 </f:metadata>
 
 <h:head>
@@ -34,6 +35,8 @@
 	<h:outputStylesheet library="css" name="table.css"  />
 	
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet"/>
 	
 </h:head>
 

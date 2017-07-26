@@ -9,6 +9,7 @@
   	<f:event type="preRenderView" listener="#{candidateController.loadTheCandidate(param['pid'])}"/>
   	<f:event type="preRenderView" listener="#{applicationController.setCandidate_id(param['pid'])}"/>
   	<f:event type="preRenderView" listener="#{applicationController.loadApplications()}"/>
+  	<f:event type="preRenderView" listener="#{hraccess.checkAuth()}"/>
 </f:metadata>
 
 <h:head>
@@ -36,6 +37,8 @@
 	<h:outputStylesheet library="css" name="table.css"  />
 	
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet"/>
 	
 </h:head>
 
@@ -156,7 +159,9 @@
 				<f:selectItem itemLabel="No" itemValue="No" />
 			</h:selectOneMenu>
 
-		     <h:commandButton class="btn btn-primary" style="color: white; margin-left:16px;" value="Submit" action="#{candidateController.blacklist(candidateController.theCandidate)}" />
+		     <h:commandButton class="btn btn-primary" style="color: white; margin-left:16px;" value="Submit" 
+		     onclick="if(!getConfirmation('Are you sure?')) return false" 
+		     action="#{candidateController.blacklist(candidateController.theCandidate)}" />
 
 		</h:form>
 	

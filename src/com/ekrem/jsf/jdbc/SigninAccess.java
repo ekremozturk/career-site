@@ -1,7 +1,10 @@
 package com.ekrem.jsf.jdbc;
 
+import java.io.IOException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.ekrem.jsf.controllers.HrSpecController;
 
@@ -52,9 +55,17 @@ public class SigninAccess {
 		return "/sign_in?faces-redirect=true";
 	}
 	
-	public boolean checkAuth() {
-		if(id!=-1) return true;
-		else return false;
+	public void checkAuth() {
+		if(id==-1) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("no-auth.xhtml");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
+		}
+		
 	}
 
 }

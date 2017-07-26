@@ -7,6 +7,7 @@
 <f:metadata>
   <f:event type="preRenderView" listener="#{advertController.getId(hraccess.id)}"/>
   <f:event type="preRenderView" listener="#{advertController.loadTheAdd(advert)}"/>
+  <f:event type="preRenderView" listener="#{hraccess.checkAuth()}"/>
 </f:metadata>
 
 <h:head>
@@ -45,6 +46,8 @@
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet"/>
+	
 	<h:outputScript library="js" name="formatDatePicker.js" />
 	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
@@ -62,7 +65,7 @@
 		<div class="row">
 	
 			<div class="col-md-12">
-				<h3>Edit #{advert.head}</h3>
+				<h3>Edit Advert: #{advert.head}</h3>
 			</div>
 		</div>
 	

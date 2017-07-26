@@ -37,6 +37,8 @@ public class AdvertController {
 	
 	private List<Advert> companyAdverts;
 	
+	private String advertFilter = "All";
+	
 	public AdvertController() throws Exception {
 		theAdvert = new Advert();
 		adverts = new ArrayList<>();
@@ -91,8 +93,13 @@ public class AdvertController {
 					activeAdverts.add(a);
 			
 			for(Advert a:adverts)
-				if(a.getHr_id() == hr_id)
+				if(a.getHr_id() == hr_id && advertFilter.equals("All")) 
 					companyAdverts.add(a);
+				else if(a.getHr_id() == hr_id && advertFilter.equals("Active") && a.getActive()) 
+					companyAdverts.add(a);
+				else if(a.getHr_id() == hr_id && advertFilter.equals("Passive") && !a.getActive()) 
+					companyAdverts.add(a);
+					
 			
 		} catch (Exception exc) {
 			
@@ -286,6 +293,18 @@ public class AdvertController {
 	
 	public void loadTheAdd(Advert advert) {
 		theAdvert = advert;
+	}
+
+	public String getAdvertFilter() {
+		return advertFilter;
+	}
+
+	public void setAdvertFilter(String advertFilter) {
+		this.advertFilter = advertFilter;
+	}
+	
+	public void filterResults() {
+		loadAdverts();
 	}
 	
 }

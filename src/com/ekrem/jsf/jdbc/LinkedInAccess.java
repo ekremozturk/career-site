@@ -141,9 +141,16 @@ public class LinkedInAccess {
 		return "/sign_in?faces-redirect=true";
 	}
 	
-	public boolean checkAuth() {
-		if(!id.equals("no-login")) return true;
-		else return false;
+	public void checkAuth() {
+		if(id.equals("no-login")) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("no-auth.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
+		}
+			
 	}
 
 }

@@ -7,10 +7,11 @@
 <f:metadata>
 	<f:event type="preRenderView" listener="#{applicationController.getId(hraccess.id)}"/>
   	<f:event type="preRenderView" listener="#{applicationController.loadApplications()}"/>
+  	<f:event type="preRenderView" listener="#{hraccess.checkAuth()}"/>
 </f:metadata>
 
 <h:head>
-
+	
 	<title>Applications</title>
 	
 	<script type="text/javascript">
@@ -26,7 +27,7 @@
            	   		return false;
           	 	}
 		}
-		
+			
      </script> 
 	
 	<h:outputStylesheet library="css" name="bootstrap.css"  />
@@ -36,11 +37,12 @@
 	
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet"/>
+	
 </h:head>
 
 <h:body>
 	<div class="container">
-
 	<div class="row">
 			<div class="col-md-12">
 				<h3>Applications Made on #{hrSpecController.getHrSpec(hraccess.id).company}'s Adverts</h3>
@@ -59,7 +61,8 @@
 				
 				<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Add Advert" outcome="add_advert"/>
 			
-				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{hraccess.logout()}"/>			
+				<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false" action="#{hraccess.logout()}"/>
+							
 				</h:form>	
 			</div>
 		</div>
@@ -165,6 +168,16 @@
 
 					<h:commandLink value="Reject" 
 					onclick="if(!getConfirmation('Are you sure want to reject the application?')) return false"
+					action="#{applicationController.changeStatus(theApp.id, 'Rejected')}"/>
+					
+				</h:column>
+				
+				<h:column>
+
+					<f:facet name="header"></f:facet>
+
+					<h:commandLink value="Reject" id="open"
+					onclick="open()"
 					action="#{applicationController.changeStatus(theApp.id, 'Rejected')}"/>
 					
 				</h:column>
