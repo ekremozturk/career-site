@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  
+<f:metadata>
+  <f:event type="preRenderView" listener="#{advertController.getId(hraccess.id)}"/>
+  <f:event type="preRenderView" listener="#{advertController.loadAdverts()}"/>
+  <f:event type="preRenderView" listener="#{hraccess.checkAuth()}"/>
+</f:metadata>
+
+<h:head>
+
+	<title>Home</title>
+	
+	<h:outputStylesheet library="css" name="bootstrap.css"  />
+	<h:outputStylesheet library="css" name="bootstrap-theme.css"  />
+	<h:outputStylesheet library="css" name="sign-in.css"  />
+	<h:outputStylesheet library="css" name="table.css"  />
+	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet"/>
+	
+	<script type="text/javascript">
+         
+		function getConfirmation(action){
+			var retVal = confirm(action);
+				if( retVal == true ){
+                  	return true;
+               	}
+               	else{
+                  
+                  	return false;
+               	}
+		}
+		
+		function getConfirmationDelete(action){
+			var retVal = confirm(action);
+				if( retVal == true ){
+					alert ("The advert has been deleted successfully");
+                  	return true;
+               	}
+               	else{
+               		alert ("Failed to delete the advert");
+                  	return false;
+               	}
+		}
+         
+      </script>
+	
+</h:head>
+
+<h:body>
+	<div class="container">
+	
+	<div class="row">
+	
+			<div class="col-md-12">
+				<h3>Welcome, #{hrSpecController.getHrSpec(hraccess.id).company}</h3>
+			</div>
+		</div>
+	
+		<hr class="colorgraph"></hr>
+	
+		<div class="row">
+			<div class="col-md-12">
+				<h:form>
+			
+					<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Homepage" outcome="home"/>
+				
+					<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Applications" outcome="applications"/>
+				
+					<h:button class="btn btn-primary" style="color: white; margin-right:16px;" value="Add Advert" outcome="add_advert"/>
+			
+					<h:commandButton class="btn btn-primary border-radius" style="color: white" value="Logout" onclick="if(!getConfirmation('Are you sure want to logout?')) return false"  action="#{hraccess.logout()}"/>			
+				</h:form>
+					
+			</div>
+		</div>
+		
+		<br></br>
+		
+		<div class="row">
+		
+		
+		<h3 class="text-center">Job adverts posted by #{hrSpecController.getHrSpec(hraccess.id).company}</h3>
+		
+		
+		<div class="col-md-3">
+		
+		<h:form>
+		
+		Filter: 
+			<h:selectOneMenu value="#{advertController.advertFilter}">
+				<f:selectItem itemLabel="All" itemValue="All" />
+				<f:selectItem itemLabel="Active" itemValue="Active" />
+				<f:selectItem itemLabel="Passive" itemValue="Passive" />
+				
+			</h:selectOneMenu>
+			
+			<h:commandButton class="btn btn-primary" style="color: white; margin-left:16px;" value="Filter" action="#{advertController.filterResults()}" />
+		</h:form>
+		
+		</div>
+		
+		</div>
+	
+		<h:form>			
+		<h:dataTable value="#{advertController.companyAdverts}" var="theAd"
+				styleClass="demo-table" 
+				headerClass="demo-table-header"
+				rowClasses="demo-table-odd-row,demo-table-even-row">
+
+				<h:column>
+					<f:facet name="header">Code</f:facet>
+					#{theAd.code}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Title</f:facet>
+					#{theAd.head}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Open Until</f:facet>
+					#{theAd.close_time}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Status</f:facet>
+					
+					#{theAd.Status()}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:outputLink value ="advert_detail.xhtml">
+					<f:param name="pid" value="#{theAd.id}" />More Info</h:outputLink>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:commandLink value ="Edit" action="#{advertController.loadAdvert(theAd.id)}"/>
+					
+				</h:column>
+				
+				<h:column>	
+					<f:facet name="header"></f:facet>
+					<h:commandLink value="Delete" onclick="if(!getConfirmationDelete('Are you sure want to delete this advert?')) return false" action="#{advertController.deleteAdvert(theAd.id)}"/>
+					
+				</h:column>
+	</h:dataTable>
+	
+	</h:form>
+	</div>
+</h:body>
+
+</html>
