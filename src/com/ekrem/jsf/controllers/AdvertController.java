@@ -21,6 +21,7 @@ import com.ekrem.jsf.models.Application;
 public class AdvertController {
 
 	private AdvertDAO advertDAO;
+	
 	private ApplicationDAO applicationDAO;
 	
 	private List<Advert> adverts;

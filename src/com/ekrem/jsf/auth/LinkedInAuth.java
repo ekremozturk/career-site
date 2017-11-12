@@ -1,4 +1,4 @@
-package com.ekrem.jsf.jdbc;
+package com.ekrem.jsf.auth;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;

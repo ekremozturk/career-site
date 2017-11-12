@@ -1,4 +1,4 @@
-package com.ekrem.jsf.jdbc;
+package com.ekrem.jsf.auth;
 
 import com.github.scribejava.core.builder.api.DefaultApi20;
 

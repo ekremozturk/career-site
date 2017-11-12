@@ -9,8 +9,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.ekrem.jsf.auth.LDAPcon;
 import com.ekrem.jsf.db.HrSpecDAO;
-import com.ekrem.jsf.jdbc.LDAPcon;
 import com.ekrem.jsf.models.HrSpec;
 
 /**
